@@ -9,7 +9,7 @@ public class MainPasswordGenerator {
     public static int passwordLength;
     public static String foreName;
     public static void main(String[] args) {
-        Encryptor encrypt = new Encryptor();
+        //Encryptor encrypt = new Encryptor();
            /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

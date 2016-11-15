@@ -110,11 +110,14 @@ public class BasicGUI extends javax.swing.JFrame {
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         if (forenameField.getText().length()==0) {
+            System.out.println("Inget förnamn");
             return;
         }
-        MainPasswordGenerator.passwordLength = lengthPicker.getValue();
-        MainPasswordGenerator.foreName = forenameField.getText();
-        System.out.println(MainPasswordGenerator.passwordLength);
+        //MainPasswordGenerator.passwordLength = lengthPicker.getValue();
+        //MainPasswordGenerator.foreName = forenameField.getText();
+        //System.out.println(MainPasswordGenerator.passwordLength);
+        Encryptor encrypt = new Encryptor();
+        encrypt.test(forenameField.getText());
     }//GEN-LAST:event_submitActionPerformed
 
     /**
