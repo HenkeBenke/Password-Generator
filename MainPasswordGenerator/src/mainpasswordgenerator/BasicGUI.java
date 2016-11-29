@@ -33,6 +33,7 @@ public class BasicGUI extends javax.swing.JFrame {
         submit = new javax.swing.JButton();
         forenameField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        showPasswords = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,18 +91,29 @@ public class BasicGUI extends javax.swing.JFrame {
                 .addComponent(submit))
         );
 
+        showPasswords.setText("Print passwords");
+        showPasswords.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showPasswordsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 105, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(showPasswords)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(showPasswords)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 40, Short.MAX_VALUE))
         );
 
@@ -113,12 +125,20 @@ public class BasicGUI extends javax.swing.JFrame {
             System.out.println("Inget förnamn");
             return;
         }
+        MainPasswordGenerator.listOfPasswords.add(MainPasswordGenerator.listOfPasswords.size(), new Password(lengthPicker.getValue()));
+        MainPasswordGenerator.encrypt(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1), forenameField.getText());
         //MainPasswordGenerator.passwordLength = lengthPicker.getValue();
         //MainPasswordGenerator.foreName = forenameField.getText();
         //System.out.println(MainPasswordGenerator.passwordLength);
-        Encryptor encrypt = new Encryptor();
-        encrypt.test(forenameField.getText());
+        //Encryptor encrypt = new Encryptor();
+        //encrypt.test(forenameField.getText());
     }//GEN-LAST:event_submitActionPerformed
+
+    private void showPasswordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPasswordsActionPerformed
+        for (int i = 0; i < MainPasswordGenerator.listOfPasswords.size(); i++) {
+            System.out.println(MainPasswordGenerator.listOfPasswords.get(i).passwordText);
+        }
+    }//GEN-LAST:event_showPasswordsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,6 +181,7 @@ public class BasicGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSlider lengthPicker;
+    private javax.swing.JButton showPasswords;
     private javax.swing.JButton submit;
     // End of variables declaration//GEN-END:variables
    }
