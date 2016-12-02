@@ -29,7 +29,7 @@ public class Encryptor {
     }*/
     void makePassword (String userText, Password pass) {
         int lengthLeft = pass.getEndLength();
-        //while (pass.getEndLength() > pass.getCurrentLength()) {
+        //while (pass.getEndLength() > pass.getCurrentLength()) {                  //Should implement min and max 
         while (lengthLeft>0) { // Swap for above later
             switch (random.nextInt(availableEncryptionMethods)) {
                 case 0:

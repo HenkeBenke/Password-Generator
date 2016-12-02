@@ -10,13 +10,19 @@ package mainpasswordgenerator;
  * @author aa97339
  */
 public class Password {
-    int length;
+    int maxLength;
+    int minLength;
     String passwordText = "";
     public Password (int passLength) {
-        length = passLength;
+        maxLength = passLength;
+        minLength = passLength;
     }
-    int getEndLength () {
-        return length;
+    public Password (int min, int max) {
+        minLength = min;
+        maxLength = max;
+    }
+    int getEndLength () { //Should probably change
+        return maxLength;
     }
     int getCurrentLength () {
         return passwordText.length();

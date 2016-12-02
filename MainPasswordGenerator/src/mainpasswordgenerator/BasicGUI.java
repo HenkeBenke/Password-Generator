@@ -33,7 +33,13 @@ public class BasicGUI extends javax.swing.JFrame {
         submit = new javax.swing.JButton();
         forenameField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        variedEncryptionCheckBox = new javax.swing.JCheckBox();
         showPasswords = new javax.swing.JButton();
+        flexibleLengthCheckBox = new javax.swing.JCheckBox();
+        minLengthSlider = new javax.swing.JSlider();
+        maxLengthSlider = new javax.swing.JSlider();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,6 +61,13 @@ public class BasicGUI extends javax.swing.JFrame {
 
         jLabel2.setText("Fore name");
 
+        variedEncryptionCheckBox.setText("Vary encryption methods");
+        variedEncryptionCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                variedEncryptionCheckBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -70,12 +83,17 @@ public class BasicGUI extends javax.swing.JFrame {
                         .addGap(99, 99, 99)
                         .addComponent(submit)))
                 .addContainerGap(30, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(forenameField)
-                .addGap(92, 92, 92))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(variedEncryptionCheckBox)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(forenameField)
+                        .addGap(74, 74, 74))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,7 +105,9 @@ public class BasicGUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(forenameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(variedEncryptionCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
                 .addComponent(submit))
         );
 
@@ -98,6 +118,44 @@ public class BasicGUI extends javax.swing.JFrame {
             }
         });
 
+        flexibleLengthCheckBox.setText("Flexible length");
+        flexibleLengthCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                flexibleLengthCheckBoxActionPerformed(evt);
+            }
+        });
+
+        minLengthSlider.setMajorTickSpacing(5);
+        minLengthSlider.setMaximum(30);
+        minLengthSlider.setMinimum(5);
+        minLengthSlider.setMinorTickSpacing(1);
+        minLengthSlider.setPaintLabels(true);
+        minLengthSlider.setPaintTicks(true);
+        minLengthSlider.setValue(5);
+        minLengthSlider.setEnabled(false);
+        minLengthSlider.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                minLengthSliderMouseReleased(evt);
+            }
+        });
+
+        maxLengthSlider.setMajorTickSpacing(5);
+        maxLengthSlider.setMaximum(30);
+        maxLengthSlider.setMinimum(5);
+        maxLengthSlider.setMinorTickSpacing(1);
+        maxLengthSlider.setPaintLabels(true);
+        maxLengthSlider.setPaintTicks(true);
+        maxLengthSlider.setEnabled(false);
+        maxLengthSlider.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                maxLengthSliderMouseReleased(evt);
+            }
+        });
+
+        jLabel4.setText("Max");
+
+        jLabel3.setText("Min");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,16 +163,36 @@ public class BasicGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(showPasswords)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(showPasswords)
+                    .addComponent(flexibleLengthCheckBox)
+                    .addComponent(maxLengthSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(minLengthSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(showPasswords)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 40, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(flexibleLengthCheckBox)
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(minLengthSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(maxLengthSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(showPasswords)))
+                .addGap(0, 54, Short.MAX_VALUE))
         );
 
         pack();
@@ -125,7 +203,13 @@ public class BasicGUI extends javax.swing.JFrame {
             System.out.println("Inget förnamn");
             return;
         }
-        MainPasswordGenerator.listOfPasswords.add(MainPasswordGenerator.listOfPasswords.size(), new Password(lengthPicker.getValue()));
+        if (lengthPicker.isEnabled()) {
+            MainPasswordGenerator.listOfPasswords.add(MainPasswordGenerator.listOfPasswords.size(), new Password(lengthPicker.getValue()));
+        }
+        else {
+            MainPasswordGenerator.listOfPasswords.add(MainPasswordGenerator.listOfPasswords.size(), new Password(minLengthSlider.getValue(), maxLengthSlider.getValue()));
+        }
+        
         //MainPasswordGenerator.encrypt(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1), forenameField.getText());
         MainPasswordGenerator.encrypt.makePassword(forenameField.getText(), MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1));
         //MainPasswordGenerator.passwordLength = lengthPicker.getValue();
@@ -140,6 +224,31 @@ public class BasicGUI extends javax.swing.JFrame {
             System.out.println(MainPasswordGenerator.listOfPasswords.get(i).passwordText);
         }
     }//GEN-LAST:event_showPasswordsActionPerformed
+
+    private void variedEncryptionCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_variedEncryptionCheckBoxActionPerformed
+
+    }//GEN-LAST:event_variedEncryptionCheckBoxActionPerformed
+
+    private void flexibleLengthCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flexibleLengthCheckBoxActionPerformed
+        if (flexibleLengthCheckBox.isSelected()) {
+            lengthPicker.setEnabled(false);
+            minLengthSlider.setEnabled(true);
+            maxLengthSlider.setEnabled(true);
+        }
+        else {
+            lengthPicker.setEnabled(true);
+            minLengthSlider.setEnabled(false);
+            maxLengthSlider.setEnabled(false);
+        }
+    }//GEN-LAST:event_flexibleLengthCheckBoxActionPerformed
+
+    private void minLengthSliderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minLengthSliderMouseReleased
+        maxLengthSlider.setMinimum(minLengthSlider.getValue());
+    }//GEN-LAST:event_minLengthSliderMouseReleased
+
+    private void maxLengthSliderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxLengthSliderMouseReleased
+        minLengthSlider.setMaximum(maxLengthSlider.getValue());
+    }//GEN-LAST:event_maxLengthSliderMouseReleased
 
     /**
      * @param args the command line arguments
@@ -177,12 +286,18 @@ public class BasicGUI extends javax.swing.JFrame {
   //  }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox flexibleLengthCheckBox;
     private javax.swing.JTextField forenameField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSlider lengthPicker;
+    private javax.swing.JSlider maxLengthSlider;
+    private javax.swing.JSlider minLengthSlider;
     private javax.swing.JButton showPasswords;
     private javax.swing.JButton submit;
+    private javax.swing.JCheckBox variedEncryptionCheckBox;
     // End of variables declaration//GEN-END:variables
    }
