@@ -121,12 +121,13 @@ public class BasicGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
-        if (forenameField.getText().length()==0) {
+        if (forenameField.getText().length()==0) {  //Make changes later
             System.out.println("Inget förnamn");
             return;
         }
         MainPasswordGenerator.listOfPasswords.add(MainPasswordGenerator.listOfPasswords.size(), new Password(lengthPicker.getValue()));
-        MainPasswordGenerator.encrypt(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1), forenameField.getText());
+        //MainPasswordGenerator.encrypt(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1), forenameField.getText());
+        MainPasswordGenerator.encrypt.makePassword(forenameField.getText(), MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1));
         //MainPasswordGenerator.passwordLength = lengthPicker.getValue();
         //MainPasswordGenerator.foreName = forenameField.getText();
         //System.out.println(MainPasswordGenerator.passwordLength);

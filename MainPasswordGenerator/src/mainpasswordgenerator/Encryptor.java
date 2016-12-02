@@ -9,7 +9,7 @@ import java.util.Random;
 public class Encryptor {
     Random random = new Random();
     int availableEncryptionMethods = 1; //Number of methods that can be used
-    int amountOfEncryptionMethodsToUse; //Number of methods to use
+    /*int amountOfEncryptionMethodsToUse; //Number of methods to use
     int[] encryptionMethods; //Which methods will be used
     //int randomNumber = random.nextInt(availableEncryptionMethods);
     public Encryptor () {
@@ -19,13 +19,32 @@ public class Encryptor {
         for (int i = 0; i < amountOfEncryptionMethodsToUse; i++) { //Choose random encryption methods
             encryptionMethods[i] = random.nextInt(availableEncryptionMethods); //Put switch-statement directly instead?
         }
-        /*switch (randomNumber) {
+        switch (randomNumber) {
         case 1:
             
             break;
         default:
             System.out.println("Error 1");    
-        } */
+        } 
+    }*/
+    void makePassword (String userText, Password pass) {
+        int lengthLeft = pass.getEndLength();
+        //while (pass.getEndLength() > pass.getCurrentLength()) {
+        while (lengthLeft>0) { // Swap for above later
+            switch (random.nextInt(availableEncryptionMethods)) {
+                case 0:
+                    pass.addToPassword(PhysicalLetterPatterns.useMethod(userText, lengthLeft));
+                    break;
+                case 1:
+                    
+                    break;
+                default:
+                    System.out.println("Error choosing encryption method");
+            }
+            lengthLeft = pass.getEndLength() - pass.getCurrentLength();
+            
+            lengthLeft--; // Remove later
+        }
     }
     void test (String name) { //First letter of every word + signs except spaces
         int amountOfDifferentSentences = 3;
@@ -68,6 +87,5 @@ public class Encryptor {
             System.out.println(sentence);
             System.out.println();
         }
-    }
-    
+    } 
 }

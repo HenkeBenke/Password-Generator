@@ -10,8 +10,8 @@ public class MainPasswordGenerator {
     //public static int passwordLength;    Probaby only use password class instead
     //public static String foreName;
     static List<Password> listOfPasswords = new ArrayList<>();
+    static Encryptor encrypt = new Encryptor();          //Remove encryptor class altogether? Maybe not
     public static void main(String[] args) {
-        //Encryptor encrypt = new Encryptor();          Remove encryptor class altogether?
         //String password = PhysicalLetterPatterns.useMethod("C",20);
         //System.out.println("password:" + password);
         
@@ -45,8 +45,8 @@ public class MainPasswordGenerator {
             }
         });
     }
-    static void encrypt (Password pass, String userText) {
-        pass.passwordText += PhysicalLetterPatterns.useMethod(userText, pass.getLength());
-    }
+    /*static void encrypt (Password pass, String userText) {
+        pass.passwordText += PhysicalLetterPatterns.useMethod(userText, pass.getEndLength());
+    }*/
     
 }

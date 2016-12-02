@@ -15,8 +15,11 @@ public class Password {
     public Password (int passLength) {
         length = passLength;
     }
-    int getLength () {
+    int getEndLength () {
         return length;
+    }
+    int getCurrentLength () {
+        return passwordText.length();
     }
     void addToPassword (String text) {
         passwordText += text;
