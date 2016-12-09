@@ -209,9 +209,9 @@ public class BasicGUI extends javax.swing.JFrame {
         else {
             MainPasswordGenerator.listOfPasswords.add(MainPasswordGenerator.listOfPasswords.size(), new Password(minLengthSlider.getValue(), maxLengthSlider.getValue()));
         }
-        
+        UserInput usIn = new UserInput(forenameField.getText());
         //MainPasswordGenerator.encrypt(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1), forenameField.getText());
-        MainPasswordGenerator.encrypt.makePassword(forenameField.getText(), MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1));
+        MainPasswordGenerator.encrypt.makePassword(usIn, MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1));
         //MainPasswordGenerator.passwordLength = lengthPicker.getValue();
         //MainPasswordGenerator.foreName = forenameField.getText();
         //System.out.println(MainPasswordGenerator.passwordLength);

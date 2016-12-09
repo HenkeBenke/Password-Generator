@@ -11,10 +11,10 @@ package mainpasswordgenerator;
  */
 public class PhysicalLetterPatterns {
     static int letterNumber;
-    static int lengthToFill;
-    static String useMethod (String input, int Length) {
+    static int lengthToFill;    //Change to using parameters for letter methods instead?
+    static String useMethod (UserInput input, int Length) {
         String partToAdd ="";
-        char letter = input.toLowerCase().charAt(0);
+        char letter = input.getFirstText().toLowerCase().charAt(0);
         letterNumber = (int)letter;
         letterNumber -= 96;
         lengthToFill = Length;
@@ -42,7 +42,7 @@ public class PhysicalLetterPatterns {
                 + "left of the shape starting at the top and moving left to right on each row with the A being capitalized:\n");
         System.out.println("  23\n qwe\nA   d");
         System.out.println();
-        lengthToFill -= passwordPart.length();
+        lengthToFill -= passwordPart.length();  //Reason to keep?
         return passwordPart;
     }
     static String letterB () {
@@ -54,7 +54,7 @@ public class PhysicalLetterPatterns {
                 + "left of the shape starting at the top and moving left to right on each row with the b being capitalized:\n");
         System.out.println("5\ntyu\ng j\nBnm");
         System.out.println();
-        lengthToFill -= passwordPart.length();
+        lengthToFill -= passwordPart.length();  //Reason to keep?
         return passwordPart;
     }
     static String letterC () {
@@ -75,7 +75,7 @@ public class PhysicalLetterPatterns {
             System.out.println("ert\nd\nCvb");
             System.out.println();
         }
-        lengthToFill -= passwordPart.length();
+        lengthToFill -= passwordPart.length();     //Reason to keep?
         return passwordPart;
     }
 }

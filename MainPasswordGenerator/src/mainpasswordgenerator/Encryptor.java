@@ -27,13 +27,14 @@ public class Encryptor {
             System.out.println("Error 1");    
         } 
     }*/
-    void makePassword (String userText, Password pass) {
-        int lengthLeft = pass.getEndLength();
-        //while (pass.getEndLength() > pass.getCurrentLength()) {                  //Should implement min and max 
-        while (lengthLeft>0) { // Swap for above later
+    void makePassword (UserInput input, Password pass) {
+        int lengthLeftToMin = pass.getMinLength();  //Remove later
+        int i = 0;             //Remove later
+        //while (pass.getMinLength() > pass.getCurrentLength()) { 
+        while (lengthLeftToMin>0) { // Swap for above later
             switch (random.nextInt(availableEncryptionMethods)) {
                 case 0:
-                    pass.addToPassword(PhysicalLetterPatterns.useMethod(userText, lengthLeft));
+                    pass.addToPassword(PhysicalLetterPatterns.useMethod(input, pass.getMaxLength()- pass.getCurrentLength()));
                     break;
                 case 1:
                     
@@ -41,9 +42,8 @@ public class Encryptor {
                 default:
                     System.out.println("Error choosing encryption method");
             }
-            lengthLeft = pass.getEndLength() - pass.getCurrentLength();
-            
-            lengthLeft--; // Remove later
+            lengthLeftToMin = pass.getMinLength() - pass.getCurrentLength() - i;    //Remove later
+            i++; // Remove later
         }
     }
     void test (String name) { //First letter of every word + signs except spaces

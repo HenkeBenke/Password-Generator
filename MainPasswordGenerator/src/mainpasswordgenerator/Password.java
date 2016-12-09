@@ -21,8 +21,11 @@ public class Password {
         minLength = min;
         maxLength = max;
     }
-    int getEndLength () { //Should probably change
+    int getMaxLength () {
         return maxLength;
+    }
+    int getMinLength () {
+        return minLength;
     }
     int getCurrentLength () {
         return passwordText.length();
