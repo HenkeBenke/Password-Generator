@@ -7,13 +7,9 @@ import java.util.ArrayList;
  * @author aa97339
  */
 public class MainPasswordGenerator {
-    //public static int passwordLength;    Probaby only use password class instead
-    //public static String foreName;
-    static List<Password> listOfPasswords = new ArrayList<>();
-    static Encryptor encrypt = new Encryptor();          //Remove encryptor class altogether? Maybe not
+    static List<Password> listOfPasswords = new ArrayList<>();                  //Temporarily store passwords if multiple are created during one run
+    static Encryptor encrypt = new Encryptor();
     public static void main(String[] args) {
-        //String password = PhysicalLetterPatterns.useMethod("C",20);
-        //System.out.println("password:" + password);
         
            /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -45,8 +41,4 @@ public class MainPasswordGenerator {
             }
         });
     }
-    /*static void encrypt (Password pass, String userText) {
-        pass.passwordText += PhysicalLetterPatterns.useMethod(userText, pass.getEndLength());
-    }*/
-    
 }

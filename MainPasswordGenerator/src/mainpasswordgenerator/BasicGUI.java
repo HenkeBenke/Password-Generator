@@ -34,6 +34,7 @@ public class BasicGUI extends javax.swing.JFrame {
         forenameField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         variedEncryptionCheckBox = new javax.swing.JCheckBox();
+        qwertyCheck = new javax.swing.JCheckBox();
         showPasswords = new javax.swing.JButton();
         flexibleLengthCheckBox = new javax.swing.JCheckBox();
         minLengthSlider = new javax.swing.JSlider();
@@ -68,6 +69,9 @@ public class BasicGUI extends javax.swing.JFrame {
             }
         });
 
+        qwertyCheck.setSelected(true);
+        qwertyCheck.setText("QWERTY layout keyboard");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -87,13 +91,15 @@ public class BasicGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(variedEncryptionCheckBox)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(forenameField)
-                        .addGap(74, 74, 74))))
+                        .addGap(74, 74, 74))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(qwertyCheck)
+                            .addComponent(variedEncryptionCheckBox))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,7 +113,9 @@ public class BasicGUI extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(variedEncryptionCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(qwertyCheck)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addComponent(submit))
         );
 
@@ -210,12 +218,7 @@ public class BasicGUI extends javax.swing.JFrame {
             MainPasswordGenerator.listOfPasswords.add(MainPasswordGenerator.listOfPasswords.size(), new Password(minLengthSlider.getValue(), maxLengthSlider.getValue()));
         }
         UserInput usIn = new UserInput(forenameField.getText());
-        //MainPasswordGenerator.encrypt(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1), forenameField.getText());
         MainPasswordGenerator.encrypt.makePassword(usIn, MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1));
-        //MainPasswordGenerator.passwordLength = lengthPicker.getValue();
-        //MainPasswordGenerator.foreName = forenameField.getText();
-        //System.out.println(MainPasswordGenerator.passwordLength);
-        //Encryptor encrypt = new Encryptor();
         //encrypt.test(forenameField.getText());
     }//GEN-LAST:event_submitActionPerformed
 
@@ -228,7 +231,7 @@ public class BasicGUI extends javax.swing.JFrame {
     private void variedEncryptionCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_variedEncryptionCheckBoxActionPerformed
 
     }//GEN-LAST:event_variedEncryptionCheckBoxActionPerformed
-
+                                                                                //Make it so only one type of length picking is enabled at a time
     private void flexibleLengthCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flexibleLengthCheckBoxActionPerformed
         if (flexibleLengthCheckBox.isSelected()) {
             lengthPicker.setEnabled(false);
@@ -296,6 +299,7 @@ public class BasicGUI extends javax.swing.JFrame {
     private javax.swing.JSlider lengthPicker;
     private javax.swing.JSlider maxLengthSlider;
     private javax.swing.JSlider minLengthSlider;
+    private javax.swing.JCheckBox qwertyCheck;
     private javax.swing.JButton showPasswords;
     private javax.swing.JButton submit;
     private javax.swing.JCheckBox variedEncryptionCheckBox;

@@ -5,6 +5,9 @@
  */
 package mainpasswordgenerator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author aa97339
@@ -13,6 +16,8 @@ public class Password {
     int maxLength;
     int minLength;
     String passwordText = "";
+    List<String> passwordParts = new ArrayList<>();
+    List<String> memoryMethods = new ArrayList<>();
     public Password (int passLength) {
         maxLength = passLength;
         minLength = passLength;
@@ -32,5 +37,9 @@ public class Password {
     }
     void addToPassword (String text) {
         passwordText += text;
+        passwordParts.add(passwordParts.size(), text);
+    }
+    void addToMemoryList (String textToAdd) {
+        memoryMethods.add(memoryMethods.size(), textToAdd);
     }
 }
