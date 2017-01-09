@@ -26,6 +26,15 @@ public class Password {
         minLength = min;
         maxLength = max;
     }
+    public Password (Password pass) {                                           //For copying another password
+        maxLength = pass.getMaxLength();
+        minLength = pass.getMinLength();
+        passwordText = pass.getPasswordText();
+        for (int i = 0; i < pass.getAmountOfMemoryMethods(); i++) { //Should suffice with one loop for both
+            passwordParts.add(i, pass.getPasswordPart(i));
+            memoryMethods.add(i, pass.getMemoryMethod(i));
+        }
+    }
     int getMaxLength () {
         return maxLength;
     }
@@ -34,6 +43,18 @@ public class Password {
     }
     int getCurrentLength () {
         return passwordText.length();
+    }
+    String getPasswordText () {
+    return passwordText;
+}
+    String getPasswordPart (int index) {
+        return passwordParts.get(index);
+    }
+    String getMemoryMethod (int index) {
+        return memoryMethods.get(index);
+    }
+    int getAmountOfMemoryMethods () {
+        return memoryMethods.size();
     }
     void addToPassword (String text) {
         passwordText += text;

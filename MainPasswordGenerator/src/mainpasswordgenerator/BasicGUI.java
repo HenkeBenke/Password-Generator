@@ -217,7 +217,8 @@ public class BasicGUI extends javax.swing.JFrame {
         else {
             MainPasswordGenerator.listOfPasswords.add(MainPasswordGenerator.listOfPasswords.size(), new Password(minLengthSlider.getValue(), maxLengthSlider.getValue()));
         }
-        UserInput usIn = new UserInput(forenameField.getText());
+        UserInput usIn = new UserInput(qwertyCheck.isSelected(), variedEncryptionCheckBox.isSelected(), forenameField.getText());
+        MainPasswordGenerator.listOfInputs.add(MainPasswordGenerator.listOfInputs.size(), usIn);
         MainPasswordGenerator.encrypt.makePassword(usIn, MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1));
         //encrypt.test(forenameField.getText());
     }//GEN-LAST:event_submitActionPerformed

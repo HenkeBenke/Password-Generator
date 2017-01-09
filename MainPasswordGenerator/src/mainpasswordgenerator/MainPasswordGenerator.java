@@ -8,6 +8,7 @@ import java.util.ArrayList;
  */
 public class MainPasswordGenerator {
     static List<Password> listOfPasswords = new ArrayList<>();                  //Temporarily store passwords if multiple are created during one run
+    static List<UserInput> listOfInputs = new ArrayList<>();
     static Encryptor encrypt = new Encryptor();
     public static void main(String[] args) {
         

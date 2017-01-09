@@ -10,8 +10,12 @@ package mainpasswordgenerator;
  * @author aa97339
  */
 public class UserInput {
+    boolean qwerty;
+    boolean variedMethods;
     String firstText = "";
-    public UserInput (String text1) {
+    public UserInput (boolean qwe, boolean varMet, String text1) {
+        qwerty = qwe;
+        variedMethods = varMet;
         firstText = text1;
     }
     String getFirstText () {
