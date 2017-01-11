@@ -13,12 +13,18 @@ public class UserInput {
     boolean qwerty;
     boolean variedMethods;
     String firstText = "";
-    public UserInput (boolean qwe, boolean varMet, String text1) {
+    String passToEncryptAgain;
+    public UserInput (boolean qwe, boolean varMet) {
         qwerty = qwe;
         variedMethods = varMet;
-        firstText = text1;
     }
     String getFirstText () {
         return firstText;
+    }
+    void setPassToEncryptAgain (String passText) {
+        passToEncryptAgain = passText;
+    }
+    boolean getQwerty () {
+        return qwerty;
     }
 }

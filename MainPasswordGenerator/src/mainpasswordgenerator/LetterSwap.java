@@ -11,7 +11,7 @@ package mainpasswordgenerator;
  */
 public class LetterSwap {
     
-    static String stepsInAlphabet (UserInput usIn) {
+    static void stepsInAlphabet (UserInput usIn, Password pass) {
         String textToChange = usIn.firstText;
         String returnText = "";
         char returnTextChars[] = new char [textToChange.length()];
@@ -27,9 +27,10 @@ public class LetterSwap {
         for (int i = 0; i < textToChange.length(); i++) {
             returnText+= returnTextChars[i];
         }
-        return returnText;
+        pass.addToPassword(returnText);
+        pass.addToMemoryList(", the word " + textToChange + " but with every letter changed to the letter next in the alphabet");
     }
-    static String stepsInAlphabet (UserInput usIn, int steps) {
+    static void stepsInAlphabet (UserInput usIn, Password pass, int steps) {
         String textToChange = usIn.firstText;
         String returnText = "";
         char returnTextChars[] = new char [textToChange.length()];
@@ -44,9 +45,10 @@ public class LetterSwap {
         for (int i = 0; i < textToChange.length(); i++) {//Merge with prior loop?
             returnText+= returnTextChars[i];
         }
-        return returnText;
+        pass.addToPassword(returnText);
+        pass.addToMemoryList(", the word " + textToChange + " but with every letter changed to the letter " + steps + " steps later in the alphabet");
     }
-    static String incrementingStepsInAlphabet (UserInput usIn, int incSize, int startStep) {
+    static void incrementingStepsInAlphabet (UserInput usIn, Password pass, int incSize, int startStep) {
         String textToChange = usIn.firstText;
         String returnText = "";
         char returnTextChars[] = new char [textToChange.length()];
@@ -61,6 +63,8 @@ public class LetterSwap {
         for (int i = 0; i < textToChange.length(); i++) {//Merge with prior loop?
             returnText+= returnTextChars[i];
         }
-        return returnText;
+        pass.addToPassword(returnText);
+        pass.addToMemoryList(", the word " + textToChange + " but with every letter changed to a letter later in the alphabet, the first one being " + startStep
+        + " later, the second one being " + (startStep + incSize) + " later, the thrid one being " + (startStep+2*incSize) + " later, and so on");
     }
 }

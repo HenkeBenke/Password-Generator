@@ -9,18 +9,33 @@ import java.util.Random;
 public class Encryptor {
     Random random = new Random();
     int availableEncryptionMethods = 1;                                         //Number of methods that can be used
+    int availableEncryptAgainMethods = 1;                                        //Number of methods that can be used to encrypt a password again 
     //public Encryptor () {}
-    void makePassword (UserInput input, Password pass) { //Add non-repeating of methods option; only using different methods when going multiple times?
+    void makePassword (UserInput input, Password pass, javax.swing.JLabel questionField) { //Add non-repeating of methods option; only using different methods when going multiple times?
         int lengthLeftToMin = pass.getMinLength();  //Remove later
         int i = 0;             //Remove later
+        int lastMethodUsed = -1;
         //while (pass.getMinLength() > pass.getCurrentLength()) { 
         while (lengthLeftToMin>0) { // Swap for above later
-            switch (random.nextInt(availableEncryptionMethods)) { //Follow questions if long rest bit that cant be filled with encryption
-                case 0: //Ask about qwerty layout first probably
+            int methodPicker = random.nextInt(availableEncryptionMethods);
+            if (methodPicker == lastMethodUsed) {
+                continue;
+            }
+            lastMethodUsed = methodPicker;
+            switch (methodPicker) { //Follow questions if long rest bit that cant be filled with encryption
+                case 1:
+                    if (!input.getQwerty()) { //Fix memory methods, and finish the uncompleted ones
+                        continue;
+                    }
                     pass.addToPassword(PhysicalLetterPatterns.useMethod(input, pass.getMaxLength()- pass.getCurrentLength()));
                     break;
-                case 1:
-                    pass.addToPassword(LetterSwap.stepsInAlphabet(input, 1));  //Set steps to random? Or let user choose between specified and random?
+                case 0:     //Need to fix when going past the alpahbet (currently only accouning for a few chars past)
+                    String question = QuestionCollection.singelNounBased[random.nextInt(QuestionCollection.singelNounBased.length)];
+                    questionField.setText(question);
+                    LetterSwap.stepsInAlphabet(input, pass, 1);  //Set steps to random? Or let user choose between specified and random?
+                    break;
+                case 2:     //Need to fix when going past the alpahbet (currently only accouning for a few chars past)
+                    LetterSwap.incrementingStepsInAlphabet(input, pass, 1, 1); //Set steps to random? Or let user choose between specified and random?
                     break;
                 default:
                     System.out.println("Error choosing encryption method");
@@ -29,6 +44,25 @@ public class Encryptor {
             i++; // Remove later
             lengthLeftToMin = 0; //To test only once, remove later obviously
         }
+    }
+    void encryptAgain (UserInput input, int passNr, int maxLength, int interval) {
+        Password pass = MainPasswordGenerator.listOfPasswords.get(passNr);
+        Password passToMakeEncryptionOn = new Password (pass,passNr);
+        passToMakeEncryptionOn.makeLonger(maxLength, interval);
+        MainPasswordGenerator.listOfPasswords.add(MainPasswordGenerator.listOfPasswords.size(), passToMakeEncryptionOn);
+        input.setPassToEncryptAgain(passToMakeEncryptionOn.getPasswordText());
+        MainPasswordGenerator.listOfInputs.add(MainPasswordGenerator.listOfInputs.size(),input);
+        switch (availableEncryptAgainMethods) {
+            case 0:
+                LetterSwap.stepsInAlphabet(input, pass, 1);  //Set steps to random? Or let user choose between specified and random?
+                break;
+            case 1:
+                LetterSwap.incrementingStepsInAlphabet(input, pass, 1, 1); //Set steps to random? Or let user choose between specified and random?
+                break;
+            default:
+                System.out.println("Error choosing encrypt again method");
+        }
+        
     }
     void test (String name) {                                                   //First letter of every word + signs except spaces
         int amountOfDifferentSentences = 3;

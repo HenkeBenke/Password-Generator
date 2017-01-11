@@ -18,6 +18,7 @@ public class Password {
     String passwordText = "";
     List<String> passwordParts = new ArrayList<>();
     List<String> memoryMethods = new ArrayList<>();
+    List<Password> formerVersions = new ArrayList<>();
     public Password (int passLength) {
         maxLength = passLength;
         minLength = passLength;
@@ -26,7 +27,7 @@ public class Password {
         minLength = min;
         maxLength = max;
     }
-    public Password (Password pass) {                                           //For copying another password
+    public Password (Password pass, int passNr) {                                           //For copying another password
         maxLength = pass.getMaxLength();
         minLength = pass.getMinLength();
         passwordText = pass.getPasswordText();
@@ -34,6 +35,7 @@ public class Password {
             passwordParts.add(i, pass.getPasswordPart(i));
             memoryMethods.add(i, pass.getMemoryMethod(i));
         }
+        formerVersions.add(formerVersions.size(), pass);
     }
     int getMaxLength () {
         return maxLength;
@@ -62,5 +64,15 @@ public class Password {
     }
     void addToMemoryList (String textToAdd) {
         memoryMethods.add(memoryMethods.size(), textToAdd);
+    }
+    void makeLonger (int max, int interval) {
+        if (max<maxLength) {}
+        else {
+            maxLength = max;
+            minLength = maxLength-interval;
+            if (minLength<0) {
+                minLength = 1;         //Maybe make higher
+            }
+        }
     }
 }
