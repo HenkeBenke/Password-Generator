@@ -19,6 +19,7 @@ public class Password {
     List<String> passwordParts = new ArrayList<>();
     List<String> memoryMethods = new ArrayList<>();
     List<Password> formerVersions = new ArrayList<>();
+    int lastMethodUsed = -1;
     public Password (int passLength) {
         maxLength = passLength;
         minLength = passLength;
@@ -74,5 +75,11 @@ public class Password {
                 minLength = 1;         //Maybe make higher
             }
         }
+    }
+    void setLastMethodUsed (int index) {
+        lastMethodUsed = index;
+    }
+    int getLastMethodUsed () {
+        return lastMethodUsed;
     }
 }

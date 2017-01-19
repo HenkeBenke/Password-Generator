@@ -11,12 +11,10 @@ package mainpasswordgenerator;
  */
 public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)?
     static int letterNumber;    //Initialize in method instead?
-    static int lengthToFill;    //Change to using parameters for letter methods instead?
-    static String useMethod (UserInput input, int Length) {
-        String partToAdd ="";
-                                                                                //Get the first letter of the word and get the corresponding number, where "a" is 1 etc
+    static void useMethod (UserInput input, Password pass) {
+        String partToAdd ="";                                                   
         char letter = ' ';
-        for (int i = 0; i < input.getFirstText().length(); i++) {
+        for (int i = 0; i < input.getFirstText().length(); i++) {               //Get the first letter of the word and get the corresponding number, where "a" is 1 etc
             int uniNr = (int)input.getFirstText().charAt(i);
             if (uniNr<65 || uniNr>122 || (uniNr>90&&uniNr<97)) {
                 continue;
@@ -26,10 +24,9 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         letterNumber = (int)letter;
         letterNumber -= 96;
-        lengthToFill = Length;
         switch (letterNumber) {
             case 1:
-                partToAdd = letterA();
+                letterA(pass);
                 break;
             case 2:
                 partToAdd = letterB();
@@ -112,19 +109,17 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
             default:
                 
         }
-        return partToAdd;
+        pass.addToPassword(partToAdd); //Should probably put in letter methods instead
     }
-    static String letterA () {
+    static void letterA (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="23qweAd";
-        if (lengthToFill-passwordPart.length()<0) {
-            return "";
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        System.out.println(passwordPart + "; shape of the letter A on the keyboard where A is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the A being capitalized:\n");
-        System.out.println("  23\n qwe\nA   d");
-        System.out.println();
-        lengthToFill -= passwordPart.length();  //Reason to keep?
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter A on the keyboard where A is in the bottom "
+                + "left of the shape starting at the top and moving left to right on each row with the A being capitalized:\n\n  23\n qwe\nA   d\n");
     }
     static String letterB () {
         String passwordPart ="5tyugjBnm";

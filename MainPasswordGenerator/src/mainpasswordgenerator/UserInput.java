@@ -21,6 +21,9 @@ public class UserInput {
     String getFirstText () {
         return firstText;
     }
+    void setFirstText (String text) {
+        firstText = text;
+    }
     void setPassToEncryptAgain (String passText) {
         passToEncryptAgain = passText;
     }

@@ -6,19 +6,19 @@ import java.util.Random;
  *
  * @author aa97339
  */
-public class Encryptor {
+public class Encryptor { //Add cancel button for use during creation?
     Random random = new Random();
     int availableEncryptionMethods = 1;                                         //Number of methods that can be used
-    int availableEncryptAgainMethods = 1;                                        //Number of methods that can be used to encrypt a password again 
+    int availableEncryptAgainMethods = 1;                                       //Number of methods that can be used to encrypt a password again 
     //public Encryptor () {}
-    void makePassword (UserInput input, Password pass, javax.swing.JLabel questionField) { //Add non-repeating of methods option; only using different methods when going multiple times?
+    /*void makePassword (UserInput input, Password pass, javax.swing.JLabel questionField) { //Add non-repeating of methods option; only using different methods when going multiple times?
         int lengthLeftToMin = pass.getMinLength();  //Remove later
         int i = 0;             //Remove later
         int lastMethodUsed = -1;
         //while (pass.getMinLength() > pass.getCurrentLength()) { 
         while (lengthLeftToMin>0) { // Swap for above later
             int methodPicker = random.nextInt(availableEncryptionMethods);
-            if (methodPicker == lastMethodUsed) {
+            if (methodPicker == lastMethodUsed) {                               //Don't use same method in a row during one encryption
                 continue;
             }
             lastMethodUsed = methodPicker;
@@ -30,7 +30,7 @@ public class Encryptor {
                     pass.addToPassword(PhysicalLetterPatterns.useMethod(input, pass.getMaxLength()- pass.getCurrentLength()));
                     break;
                 case 0:     //Need to fix when going past the alpahbet (currently only accouning for a few chars past)
-                    String question = QuestionCollection.singelNounBased[random.nextInt(QuestionCollection.singelNounBased.length)];
+                    String question = QuestionCollection.singelNounBased[random.nextInt(QuestionCollection.singelNounBased.length)]; //Use different random?
                     questionField.setText(question);
                     LetterSwap.stepsInAlphabet(input, pass, 1);  //Set steps to random? Or let user choose between specified and random?
                     break;
@@ -43,6 +43,59 @@ public class Encryptor {
             lengthLeftToMin = pass.getMinLength() - pass.getCurrentLength() - i;    //Remove later
             i++; // Remove later
             lengthLeftToMin = 0; //To test only once, remove later obviously
+        }
+    }*/
+    void makePassword (UserInput input, Password pass) {
+        if (pass.getMinLength()-pass.getCurrentLength()<1) {
+            return;
+        }
+        else {  //Need to add follow questions if long rest bit that cant be filled with encryption
+            switch (pass.getLastMethodUsed()) {
+                case 1: //Fix memory methods, and finish the uncompleted ones
+                    PhysicalLetterPatterns.useMethod(input, pass);
+                    break;
+                case 0:     //Need to fix when going past the alpahbet (currently only accouning for a few chars past)
+                    LetterSwap.stepsInAlphabet(input, pass, 1);  //Set steps to random? Or let user choose between specified and random?
+                    break;
+                case 2:     //Need to fix when going past the alpahbet (currently only accouning for a few chars past)
+                    LetterSwap.incrementingStepsInAlphabet(input, pass, 1, 1); //Set steps to random? Or let user choose between specified and random?
+                    break;
+                default:
+                    System.out.println("Error picking encryption method");
+            }
+        }
+        if (pass.getMinLength()-pass.getCurrentLength()>1) {
+            return;
+        }
+    }
+    void methodPicker (UserInput input, Password pass, javax.swing.JLabel questionField) { //Remove input?
+        while (true) { 
+            int methodNr = random.nextInt(availableEncryptionMethods);
+            if (methodNr == pass.getLastMethodUsed()) {                     //Don't use same method in a row during one encryption
+                continue;
+            }
+            pass.setLastMethodUsed(methodNr);
+            String question;
+            switch (methodNr) {
+                case 1:
+                    if (!input.getQwerty()) {
+                        continue;
+                    }
+                    question = QuestionCollection.singelNounBased[random.nextInt(QuestionCollection.singelNounBased.length)]; //Use different random?
+                    questionField.setText(question);
+                    break;
+                case 0:
+                    question = QuestionCollection.singelNounBased[random.nextInt(QuestionCollection.singelNounBased.length)]; //Use different random?
+                    questionField.setText(question);
+                    break;
+                case 2:
+                    question = QuestionCollection.singelNounBased[random.nextInt(QuestionCollection.singelNounBased.length)]; //Use different random?
+                    questionField.setText(question);
+                    break;
+                default:
+                    System.out.println("Error choosing encryption method");
+            }
+            break;
         }
     }
     void encryptAgain (UserInput input, int passNr, int maxLength, int interval) {

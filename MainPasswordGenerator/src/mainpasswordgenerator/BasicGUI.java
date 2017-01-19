@@ -250,9 +250,8 @@ public class BasicGUI extends javax.swing.JFrame {
         }
         UserInput usIn = new UserInput(qwertyCheck.isSelected(), variedEncryptionCheckBox.isSelected());
         MainPasswordGenerator.listOfInputs.add(MainPasswordGenerator.listOfInputs.size(), usIn);
-        MainPasswordGenerator.encrypt.makePassword(usIn, MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1), questionLbl);
-        choosePasswordCombo.addItem(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1).getPasswordText());
-        //encrypt.test(forenameField.getText());
+        submit.setEnabled(false);
+        MainPasswordGenerator.encrypt.methodPicker(usIn, MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1), questionLbl);
     }//GEN-LAST:event_submitActionPerformed
 
     private void showPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPasswordActionPerformed
@@ -301,7 +300,14 @@ public class BasicGUI extends javax.swing.JFrame {
             System.out.println("Inget förnamn");
             return;
         }
-        
+        else if (false) { //Add code for encrypt again compatability
+            
+        }
+        UserInput usIn = MainPasswordGenerator.listOfInputs.get(MainPasswordGenerator.listOfInputs.size()-1);
+        usIn.setFirstText(forenameField.getText());
+        MainPasswordGenerator.encrypt.makePassword(usIn, MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1));
+        choosePasswordCombo.addItem(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1).getPasswordText());
+        submit.setEnabled(true);
     }//GEN-LAST:event_submitAnswerButtActionPerformed
 
     
