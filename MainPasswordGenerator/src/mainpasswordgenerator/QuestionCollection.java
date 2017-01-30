@@ -14,7 +14,7 @@ package mainpasswordgenerator;
  */
 public class QuestionCollection {   //Use like instead of favourite in questions?
     //static List<String> nounBased = new ArrayList<>();
-    static String[] singelNounBased = {
+    static String[] singleNounBased = {
         "What's your favourite animal? (If multiworded, write as one)",
         "What's your favourite dish? (If multiworded, write as one)",
         "Write a street name that is memorable to you (if multiworded, write as one)",

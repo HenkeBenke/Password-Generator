@@ -1,6 +1,8 @@
 
 package mainpasswordgenerator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 /**
  *
@@ -8,8 +10,8 @@ import java.util.Random;
  */
 public class Encryptor { //Add cancel button for use during creation?
     Random random = new Random();
-    int availableEncryptionMethods = 1;                                         //Number of methods that can be used
-    int availableEncryptAgainMethods = 1;                                       //Number of methods that can be used to encrypt a password again 
+    int availableEncryptionMethods = 3;                                         //Number of methods that can be used
+    int availableEncryptAgainMethods = 2;                                       //Number of methods that can be used to encrypt a password again 
     //public Encryptor () {}
     /*void makePassword (UserInput input, Password pass, javax.swing.JLabel questionField) { //Add non-repeating of methods option; only using different methods when going multiple times?
         int lengthLeftToMin = pass.getMinLength();  //Remove later
@@ -45,58 +47,153 @@ public class Encryptor { //Add cancel button for use during creation?
             lengthLeftToMin = 0; //To test only once, remove later obviously
         }
     }*/
-    void makePassword (UserInput input, Password pass) {
+    void makePassword (UserInput input, Password pass, javax.swing.JLabel questionfield, javax.swing.JComboBox<String> passComboBox) {
         if (pass.getMinLength()-pass.getCurrentLength()<1) {
             return;
         }
         else {  //Need to add follow questions if long rest bit that cant be filled with encryption
+            int priorLength = pass.getCurrentLength();
             switch (pass.getLastMethodUsed()) {
-                case 1: //Fix memory methods, and finish the uncompleted ones
+                case 0: //Maybe make better memory methods text
                     PhysicalLetterPatterns.useMethod(input, pass);
                     break;
-                case 0:     //Need to fix when going past the alpahbet (currently only accouning for a few chars past)
-                    LetterSwap.stepsInAlphabet(input, pass, 1);  //Set steps to random? Or let user choose between specified and random?
+                case 1:
+                    LetterSwap.stepsInAlphabet(input, pass, 1);  //Set steps to random? Or let user choose between specified and random? Set different random based on complexity chosen?
                     break;
-                case 2:     //Need to fix when going past the alpahbet (currently only accouning for a few chars past)
-                    LetterSwap.incrementingStepsInAlphabet(input, pass, 1, 1); //Set steps to random? Or let user choose between specified and random?
+                case 2:
+                    LetterSwap.incrementingStepsInAlphabet(input, pass, 1, 1); //Set steps to random? Or let user choose between specified and random? Set different random based on complexity chosen?
                     break;
                 default:
                     System.out.println("Error picking encryption method");
             }
+            if (priorLength==pass.getCurrentLength()) {
+                switch (pass.getLastMethodUsed()) {
+                    case 1:
+                        tryOtherSingleNounBased(input, pass);
+                        break;
+                    case 0:
+                        tryOtherSingleNounBased(input, pass);
+                        break;
+                    case 2:
+                        tryOtherSingleNounBased(input, pass);
+                        break;
+                }
+                if (priorLength==pass.getCurrentLength()) {
+                    //Move below line to the place where remaining pass length == 0
+                    passComboBox.addItem(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1).getPasswordText());
+                    return; //Swap for short questions
+                }
+            }
         }
         if (pass.getMinLength()-pass.getCurrentLength()>1) {
-            return;
+            methodPicker(input, pass, questionfield);
         }
     }
-    void methodPicker (UserInput input, Password pass, javax.swing.JLabel questionField) { //Remove input?
+    void methodPicker (UserInput input, Password pass, javax.swing.JLabel questionField) {
         while (true) { 
             int methodNr = random.nextInt(availableEncryptionMethods);
-            if (methodNr == pass.getLastMethodUsed()) {                     //Don't use same method in a row during one encryption
+            if (methodNr == pass.getLastMethodUsed()) {                         //Don't use same method in a row during one encryption
                 continue;
             }
             pass.setLastMethodUsed(methodNr);
-            String question;
             switch (methodNr) {
-                case 1:
+                case 0:
                     if (!input.getQwerty()) {
                         continue;
                     }
-                    question = QuestionCollection.singelNounBased[random.nextInt(QuestionCollection.singelNounBased.length)]; //Use different random?
-                    questionField.setText(question);
+                    while (true) {
+                        if (pass.getAmountOfSingleNounQuestionsUsed()>=QuestionCollection.singleNounBased.length) {
+                            break;   //What to do if out of questions?
+                        }
+                        int questionNr = random.nextInt(QuestionCollection.singleNounBased.length); //Use different random?
+                        boolean used = false;
+                        for (int i = 0; i < pass.getAmountOfSingleNounQuestionsUsed(); i++) {
+                            if (pass.getSingleNounQuestionUsed(i)==questionNr) {
+                                used = true;
+                                break;
+                            }
+                        }
+                        if (used) {
+                            continue;
+                        }
+                        questionField.setText(QuestionCollection.singleNounBased[questionNr]);
+                        pass.addSingleNounUsed(questionNr);
+                        break;
+                    }
                     break;
-                case 0:
-                    question = QuestionCollection.singelNounBased[random.nextInt(QuestionCollection.singelNounBased.length)]; //Use different random?
-                    questionField.setText(question);
+                case 1:
+                    while (true) {
+                        if (pass.getAmountOfSingleNounQuestionsUsed()>=QuestionCollection.singleNounBased.length) {
+                            break;   //What to do if out of questions?
+                        }
+                        int questionNr = random.nextInt(QuestionCollection.singleNounBased.length); //Use different random?
+                        boolean used = false;
+                        for (int i = 0; i < pass.getAmountOfSingleNounQuestionsUsed(); i++) {
+                            if (pass.getSingleNounQuestionUsed(i)==questionNr) {
+                                used = true;
+                                break;
+                            }
+                        }
+                        if (used) {
+                            continue;
+                        }
+                        questionField.setText(QuestionCollection.singleNounBased[questionNr]);
+                        pass.addSingleNounUsed(questionNr);
+                        break;
+                    }
                     break;
                 case 2:
-                    question = QuestionCollection.singelNounBased[random.nextInt(QuestionCollection.singelNounBased.length)]; //Use different random?
-                    questionField.setText(question);
+                    while (true) {
+                        if (pass.getAmountOfSingleNounQuestionsUsed()>=QuestionCollection.singleNounBased.length) {
+                            break;   //What to do if out of questions?
+                        }
+                        int questionNr = random.nextInt(QuestionCollection.singleNounBased.length); //Use different random?
+                        boolean used = false;
+                        for (int i = 0; i < pass.getAmountOfSingleNounQuestionsUsed(); i++) {
+                            if (pass.getSingleNounQuestionUsed(i)==questionNr) {
+                                used = true;
+                                break;
+                            }
+                        }
+                        if (used) {
+                            continue;
+                        }
+                        questionField.setText(QuestionCollection.singleNounBased[questionNr]);
+                        pass.addSingleNounUsed(questionNr);
+                        break;
+                    }
                     break;
                 default:
                     System.out.println("Error choosing encryption method");
             }
             break;
         }
+    }
+    void tryOtherSingleNounBased (UserInput input, Password pass) {
+        List<Integer> methodNumbers = new ArrayList<>();
+        for (int i = 0; i < availableEncryptionMethods; i++) {
+            methodNumbers.add(i, i);
+        }
+        for (int i = 0; i < availableEncryptionMethods; i++) {
+            int methodToTry = methodNumbers.remove(random.nextInt(methodNumbers.size())); //Use differnet random?
+            if (methodToTry==pass.getLastMethodUsed()) {
+                continue;
+            }
+            switch (i) {
+                case 0: //Maybe make better memory methods text
+                    PhysicalLetterPatterns.useMethod(input, pass);
+                    break;
+                case 1:
+                    LetterSwap.stepsInAlphabet(input, pass, 1);  //Set steps to random? Or let user choose between specified and random? Set different random based on complexity chosen?
+                    break;
+                case 2:
+                    LetterSwap.incrementingStepsInAlphabet(input, pass, 1, 1); //Set steps to random? Or let user choose between specified and random? Set different random based on complexity chosen?
+                    break;
+                default:
+                    
+            }
+        }
+        
     }
     void encryptAgain (UserInput input, int passNr, int maxLength, int interval) {
         Password pass = MainPasswordGenerator.listOfPasswords.get(passNr);
@@ -107,10 +204,10 @@ public class Encryptor { //Add cancel button for use during creation?
         MainPasswordGenerator.listOfInputs.add(MainPasswordGenerator.listOfInputs.size(),input);
         switch (availableEncryptAgainMethods) {
             case 0:
-                LetterSwap.stepsInAlphabet(input, pass, 1);  //Set steps to random? Or let user choose between specified and random?
+                LetterSwap.stepsInAlphabet(input, pass, 1);  //Set steps to random? Or let user choose between specified and random? Set different random based on complexity chosen?
                 break;
             case 1:
-                LetterSwap.incrementingStepsInAlphabet(input, pass, 1, 1); //Set steps to random? Or let user choose between specified and random?
+                LetterSwap.incrementingStepsInAlphabet(input, pass, 1, 1); //Set steps to random? Or let user choose between specified and random? Set different random based on complexity chosen?
                 break;
             default:
                 System.out.println("Error choosing encrypt again method");

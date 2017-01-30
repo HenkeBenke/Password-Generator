@@ -10,9 +10,8 @@ package mainpasswordgenerator;
  * @author aa97339
  */
 public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)?
-    static int letterNumber;    //Initialize in method instead?
     static void useMethod (UserInput input, Password pass) {
-        String partToAdd ="";                                                   
+        int letterNumber;                                                  
         char letter = ' ';
         for (int i = 0; i < input.getFirstText().length(); i++) {               //Get the first letter of the word and get the corresponding number, where "a" is 1 etc
             int uniNr = (int)input.getFirstText().charAt(i);
@@ -29,87 +28,83 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
                 letterA(pass);
                 break;
             case 2:
-                partToAdd = letterB();
+                letterB(pass);
                 break;
             case 3:
-                partToAdd = letterC();
+                letterC(pass);
                 break;
             case 4:
-                partToAdd = letterD();
+                letterD(pass);
                 break;
             case 5:
-                partToAdd = letterE();
+                letterE(pass);
                 break;
             case 6:
-                partToAdd = letterF();
+                letterF(pass);
                 break;
             case 7:
-                //partToAdd = letterG();
-                System.out.println("Not done yet");
+                letterG(pass);
                 break;
             case 8:
-                partToAdd = letterH();
+                letterH(pass);
                 break;
             case 9:
-                partToAdd = letterI();
+                letterI(pass);
                 break;
             case 10:
-                partToAdd = letterJ();
+                letterJ(pass);
                 break;
             case 11:
-                partToAdd = letterK();
+                letterK(pass);
                 break;
             case 12:
-                partToAdd = letterL();
+                letterL(pass);
                 break;
             case 13:
-                partToAdd = letterM();
+                letterM(pass);
                 break;
             case 14:
-                partToAdd = letterN();
+                letterN(pass);
                 break;
             case 15:
-                partToAdd = letterO();
+                letterO(pass);
                 break;
             case 16:
-                //partToAdd = letterP();
-                System.out.println("Not done yet");
+                letterP(pass);
                 break;
             case 17:
-                partToAdd = letterQ();
+                letterQ(pass);
                 break;
             case 18:
-                partToAdd = letterR();
+                letterR(pass);
                 break;
             case 19:
-                //partToAdd = letterS();
-                System.out.println("Not done yet");
+                letterS(pass);
                 break;
             case 20:
-                partToAdd = letterT();
+                letterT(pass);
                 break;
             case 21:
-                partToAdd = letterU();
+                letterU(pass);
                 break;
             case 22:
-                partToAdd = letterV();
+                letterV(pass);
                 break;
             case 23:
-                partToAdd = letterW();
+                letterW(pass);
                 break;
             case 24:
-                partToAdd = letterX();
+                letterX(pass);
                 break;
             case 25:
-                partToAdd = letterY();
+                letterY(pass);
                 break;
             case 26:
-                partToAdd = letterZ();
+                letterZ(pass);
                 break;
             default:
                 
         }
-        pass.addToPassword(partToAdd); //Should probably put in letter methods instead
     }
     static void letterA (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -121,529 +116,294 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         pass.addToMemoryList("shape of the letter A on the keyboard where A is in the bottom "
                 + "left of the shape starting at the top and moving left to right on each row with the A being capitalized:\n\n  23\n qwe\nA   d\n");
     }
-    static String letterB () {
+    static void letterB (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="5tyugjBnm";
-        if (lengthToFill-passwordPart.length()<0) {
-            return "";
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        System.out.println(passwordPart + "; shape of the letter b on the keyboard where b is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the b being capitalized:\n");
-        System.out.println("5\ntyu\ng j\nBnm");
-        System.out.println();
-        lengthToFill -= passwordPart.length();  //Reason to keep?
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter b on the keyboard where b is in the bottom "
+                + "left of the shape starting at the top and moving left to right on each row with the b being capitalized:\n\n5\ntyu\ng j\nBnm");
     }
-    static String letterC () {
+    static void letterC (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="ertdCvb";
-        if (lengthToFill-passwordPart.length()<0) {
+        if (length-passwordPart.length()<0) {
             passwordPart = "ersxC";
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
+            if (length-passwordPart.length()<0) {
+                return;
             }
-            System.out.println(passwordPart + "; shape of the letter C on the keyboard where C is in the bottom "
-                + "right of the shape starting at the top and moving left to right on each row with the C being capitalized:\n");
-            System.out.println(" er\ns\n xC");
-            System.out.println();
+            pass.addToPassword(passwordPart);
+            pass.addToMemoryList("shape of the letter C on the keyboard where C is in the bottom "
+                + "right of the shape starting at the top and moving left to right on each row with the C being capitalized:\n\n er\ns\n xC");
         }
         else {
-            System.out.println(passwordPart + "; shape of the letter C on the keyboard where C is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the C being capitalized:\n");
-            System.out.println("ert\nd\nCvb");
-            System.out.println();
+            pass.addToPassword(passwordPart);
+            pass.addToMemoryList("shape of the letter C on the keyboard where C is in the bottom "
+                + "left of the shape starting at the top and moving left to right on each row with the C being capitalized:\n\nert\nd\nCvb");
         }
-        lengthToFill -= passwordPart.length();     //Reason to keep?
-        return passwordPart;
-    } 
-    static String letterD () {
+    }
+    static void letterD (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="34etDgcv";
-        if (lengthToFill-passwordPart.length()<0) {
+        if (length-passwordPart.length()<0) {
             passwordPart = "34etDf";
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
+            if (length-passwordPart.length()<0) {
+                return;
             }
-            System.out.println(passwordPart + "; shape of the letter D on the keyboard where D is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the D being capitalized:\n");
-            System.out.println("34\ne t\nDf");
-            System.out.println();
+            pass.addToPassword(passwordPart);
+            pass.addToMemoryList("shape of the letter D on the keyboard where D is in the bottom "
+                + "left of the shape starting at the top and moving left to right on each row with the D being capitalized:\n\n34\ne t\nDf");
         }
         else {
-            System.out.println(passwordPart + "; shape of the letter D on the keyboard where D is the second lowest character to the "
-                + "left with it starting at the top and moving left to right on each row with the D being capitalized:\n");
-            System.out.println("34\ne t\nD g\ncv");
-            System.out.println();
+            pass.addToPassword(passwordPart);
+            pass.addToMemoryList("shape of the letter D on the keyboard where D is the second lowest character to the "
+                + "left with it starting at the top and moving left to right on each row with the D being capitalized:\n\n34\ne t\nD g\ncv");
         }
-        lengthToFill -= passwordPart.length();     //Reason to keep?
-        return passwordPart;
     }
-    static String letterE () {
+    static void letterE (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="Ertdfcvb";
-        /*if (lengthToFill-passwordPart.length()<0) {
-            passwordPart = "";*/
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
-            }/*
-            System.out.println(passwordPart + "; shape of the letter D on the keyboard where D is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the D being capitalized:\n");
-            System.out.println("34\ne t\nDf");
-            System.out.println();
-        }*/
-        else {
-            System.out.println(passwordPart + "; shape of the letter E on the keyboard where E is in the top "
-                + "left of the shape starting at the top and moving left to right on each row with the E being capitalized:\n");
-            System.out.println("Ert\ndf\ncvb"); //Too similar to C?
-            System.out.println();
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        lengthToFill -= passwordPart.length();     //Reason to keep?
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter E on the keyboard where E is in the top "
+                + "left of the shape starting at the top and moving left to right on each row with the E being capitalized:\n\nErt\ndf\ncvb");
     }
-    static String letterF () {
+    static void letterF (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="456rtF";
-        /*if (lengthToFill-passwordPart.length()<0) {
-            passwordPart = "";*/
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
-            }/*
-            System.out.println(passwordPart + "; shape of the letter D on the keyboard where D is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the D being capitalized:\n");
-            System.out.println("34\ne t\nDf");
-            System.out.println();
-        }*/
-        else {
-            System.out.println(passwordPart + "; shape of the letter F on the keyboard where F is in the bottom "
-                + "of the shape starting at the top and moving left to right on each row with the F being capitalized:\n");
-            System.out.println("456\nrt\nF");
-            System.out.println();
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        lengthToFill -= passwordPart.length();     //Reason to keep?
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter F on the keyboard where F is in the bottom "
+                + "of the shape starting at the top and moving left to right on each row with the F being capitalized:\n\n456\nrt\nF");
     }
-    static String letterG () {
-        String passwordPart ="Ertdfcvb";
-        /*if (lengthToFill-passwordPart.length()<0) {
-            passwordPart = "";*/
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
-            }/*
-            System.out.println(passwordPart + "; shape of the letter D on the keyboard where D is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the D being capitalized:\n");
-            System.out.println("34\ne t\nDf");
-            System.out.println();
-        }*/
-        else {
-            System.out.println(passwordPart + "; shape of the letter E on the keyboard where E is in the top "
-                + "left of the shape starting at the top and moving left to right on each row with the E being capitalized:\n");
-            System.out.println("Ert\ndf\ncvb"); //Too similar to C?
-            System.out.println();
+    static void letterG (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
+        String passwordPart ="Gbvcde456";
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        lengthToFill -= passwordPart.length();     //Reason to keep?
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter G on the keyboard where G is in the middle right "
+                + "of the shape starting at G and moving in a outwards spiral with the G being capitalized:\n\n 456\ne\nd G\ncvb");
     }
-    static String letterH () {
+    static void letterH (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="68yuiHk";
-        /*if (lengthToFill-passwordPart.length()<0) {
-            passwordPart = "";*/
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
-            }/*
-            System.out.println(passwordPart + "; shape of the letter D on the keyboard where D is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the D being capitalized:\n");
-            System.out.println("34\ne t\nDf");
-            System.out.println();
-        }*/
-        else {
-            System.out.println(passwordPart + "; shape of the letter H on the keyboard where H is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the H being capitalized:\n");
-            System.out.println("6 8\nyui\nH k");
-            System.out.println();
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        lengthToFill -= passwordPart.length();     //Reason to keep?
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter H on the keyboard where H is in the bottom "
+                + "left of the shape starting at the top and moving left to right on each row with the H being capitalized:\n\n6 8\nyui\nH k");
     }
-    static String letterI () { //Add i and/or remove some alternatives?
-        String passwordPart ="8Ik,";
-        if (lengthToFill-passwordPart.length()<0) {
+    static void letterI (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
+        String passwordPart ="68yuiHk";
+        if (length-passwordPart.length()<0) {
             passwordPart = "Ik,";
-            if (lengthToFill-passwordPart.length()<0) {
+            if (length-passwordPart.length()<0) {
                 passwordPart = "Ik";
-                if (lengthToFill-passwordPart.length()<0) {
-                    return "";
+                if (length-passwordPart.length()<0) {
+                    return;
                 }
-                System.out.println(passwordPart + "; shape of the letter I on the keyboard where I is in the top "
-                + "of the shape starting at the top with the I being capitalized:\n");
-                System.out.println("I\nk");
-                System.out.println();
+                pass.addToPassword(passwordPart);
+                pass.addToMemoryList("shape of the letter I on the keyboard where I is in the top "
+                + "of the shape starting at the top with the I being capitalized:\n\nI\nk");
             }
             else {
-            System.out.println(passwordPart + "; shape of the letter I on the keyboard where I is in the top "
-                + "of the shape starting at the top with the I being capitalized:\n");
-            System.out.println("I\nk\n,");
-            System.out.println();
+                pass.addToPassword(passwordPart);
+                pass.addToMemoryList("shape of the letter I on the keyboard where I is in the top "
+                + "of the shape starting at the top with the I being capitalized:\n\nI\nk\n,");
             }
         }
         else {
-            System.out.println(passwordPart + "; shape of the letter I on the keyboard where I is  second from the top "
-                + "in the shape starting at the top and moving left to right on each row with the I being capitalized:\n");
-            System.out.println("8\nI\nk\n,");
-            System.out.println();
+            pass.addToPassword(passwordPart);
+            pass.addToMemoryList("shape of the letter I on the keyboard where I is second from the top "
+                + "in the shape starting at the top with the I being capitalized:\n\n8\nI\nk\n,");
         }
-        lengthToFill -= passwordPart.length();     //Reason to keep?
-        return passwordPart;
     }
-    static String letterJ () { //Change big J by removing . ?
+    static void letterJ (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="789oJlm,.";
-        if (lengthToFill-passwordPart.length()<0) {
+        if (length-passwordPart.length()<0) {
             passwordPart = "8iJk";
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
+            if (length-passwordPart.length()<0) {
+                return;
             }
-            System.out.println(passwordPart + "; shape of the letter J on the keyboard where J is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the J being capitalized:\n");
-            System.out.println(" 8\n i\nJk");
-            System.out.println();
+            pass.addToPassword(passwordPart);
+            pass.addToMemoryList("shape of the letter J on the keyboard where J is in the bottom "
+                + "left of the shape starting at the top and moving left to right on each row with the J being capitalized:\n\n 8\n i\nJk");
         }
         else {
-            System.out.println(passwordPart + "; shape of the letter J on the keyboard where J is on the tip "
-                + "of the curving part, starting at the top and moving left to right on each row with the J being capitalized:\n");
-            System.out.println("789\n  o\nJ l\nm,.");
-            System.out.println();
+            pass.addToPassword(passwordPart);
+            pass.addToMemoryList("shape of the letter J on the keyboard where J is on the tip "
+                + "of the curving part, starting at the top and moving left to right on each row with the J being capitalized:\n\n789\n  o\nJ l\nm,.");
         }
-        lengthToFill -= passwordPart.length();
-        return passwordPart;
     }
-    static String letterK () {
+    static void letterK (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="uojKm.";
-        /*if (lengthToFill-passwordPart.length()<0) {
-            passwordPart = "8iJk";*/
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
-            }/*
-            System.out.println(passwordPart + "; shape of the letter J on the keyboard where J is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the J being capitalized:\n");
-            System.out.println("8\ni\nJk");
-            System.out.println();
-        }*/
-        else {
-            System.out.println(passwordPart + "; shape of the letter K on the keyboard where K is in the middle "
-                + "of the shape starting at the top and moving left to right on each row with the K being capitalized:\n");
-            System.out.println("u o\njK\nm .");
-            System.out.println();
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        lengthToFill -= passwordPart.length();
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter K on the keyboard where K is in the middle "
+                + "of the shape starting at the top and moving left to right on each row with the K being capitalized:\n\nu o\njK\nm .");
     }
-    static String letterL () {
+    static void letterL (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="8ikL";
-        /*if (lengthToFill-passwordPart.length()<0) {
-            passwordPart = "8iJk";*/
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
-            }/*
-            System.out.println(passwordPart + "; shape of the letter J on the keyboard where J is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the J being capitalized:\n");
-            System.out.println("8\ni\nJk");
-            System.out.println();
-        }*/
-        else {
-            System.out.println(passwordPart + "; shape of the letter L on the keyboard where L is in the bottom "
-                + "right of the shape starting at the top and moving left to right on each row with the L being capitalized:\n");
-            System.out.println("8\ni\nkL");
-            System.out.println();
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        lengthToFill -= passwordPart.length();
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter L on the keyboard where L is in the bottom "
+                + "right of the shape starting at the top and moving left to right on each row with the L being capitalized:\n\n8\ni\nkL");
     }
-    static String letterM () {
+    static void letterM (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="7ujMygr3edc";
-        /*if (lengthToFill-passwordPart.length()<0) {
-            passwordPart = "8iJk";*/
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
-            }/*
-            System.out.println(passwordPart + "; shape of the letter J on the keyboard where J is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the J being capitalized:\n");
-            System.out.println("8\ni\nJk");
-            System.out.println();
-        }*/
-        else {
-            System.out.println(passwordPart + "; shape of the letter M on the keyboard where M is in the bottom "
-                + "right of the shape starting right and moving top to bottom on each column with the M being capitalized:\n");
-            System.out.println("3   7\ner yu\nd g j\nc   M");
-            System.out.println();
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        lengthToFill -= passwordPart.length();
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter M on the keyboard where M is in the bottom "
+                + "right of the shape starting right and moving top to bottom on each column with the M being capitalized:\n\n3   7\ner yu\nd g j\nc   M");
     }
-    static String letterN () {
+    static void letterN (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="6yhNgr3edc";
-        /*if (lengthToFill-passwordPart.length()<0) {
-            passwordPart = "8iJk";*/
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
-            }/*
-            System.out.println(passwordPart + "; shape of the letter J on the keyboard where J is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the J being capitalized:\n");
-            System.out.println("8\ni\nJk");
-            System.out.println();
-        }*/
-        else {
-            System.out.println(passwordPart + "; shape of the letter N on the keyboard where N is in the bottom "
-                + "right of the shape starting right and moving top to bottom on each column with the M being capitalized:\n");
-            System.out.println("3  6\ner y\nd gh\nc  N");
-            System.out.println();
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        lengthToFill -= passwordPart.length();
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter N on the keyboard where N is in the bottom "
+                + "right of the shape starting right and moving top to bottom on each column with the N being capitalized:\n\n3  6\ner y\nd gh\nc  N");
     }
-    static String letterO () {
+    static void letterO (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="uiOjlm,.";
-        /*if (lengthToFill-passwordPart.length()<0) {
-            passwordPart = "8iJk";*/
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
-            }/*
-            System.out.println(passwordPart + "; shape of the letter J on the keyboard where J is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the J being capitalized:\n");
-            System.out.println("8\ni\nJk");
-            System.out.println();
-        }*/
-        else {
-            System.out.println(passwordPart + "; shape of the letter O on the keyboard where O is in the top "
-                + "right of the shape starting at the top and moving left to right on each row with the O being capitalized:\n");
-            System.out.println("uiO\nj l\nm,.");
-            System.out.println();
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        lengthToFill -= passwordPart.length();
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter O on the keyboard where O is in the top "
+                + "right of the shape starting at the top and moving left to right on each row with the O being capitalized:\n\nuiO\nj l\nm,.");
     }
-    static String letterP () {
-        String passwordPart ="uiOjlm,.";
-        /*if (lengthToFill-passwordPart.length()<0) {
-            passwordPart = "8iJk";*/
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
-            }/*
-            System.out.println(passwordPart + "; shape of the letter J on the keyboard where J is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the J being capitalized:\n");
-            System.out.println("8\ni\nJk");
-            System.out.println();
-        }*/
-        else {
-            System.out.println(passwordPart + "; shape of the letter O on the keyboard where O is in the top "
-                + "right of the shape starting at the top and moving left to right on each row with the O being capitalized:\n");
-            System.out.println("uiO\nj l\nm,.");
-            System.out.println();
+    static void letterP (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
+        String passwordPart ="yuioPhknm,";
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        lengthToFill -= passwordPart.length();
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter P lying down and mirrored on the keyboard where P is on the far "
+                + "right of the shape starting at the top and moving left to right on each row with the P being capitalized:\n\nyuioP\nh k\nnm,");
     }
-    static String letterQ () {
+    static void letterQ (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="123Qeasdv";
-        /*if (lengthToFill-passwordPart.length()<0) {
-            passwordPart = "8iJk";*/
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
-            }/*
-            System.out.println(passwordPart + "; shape of the letter J on the keyboard where J is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the J being capitalized:\n");
-            System.out.println("8\ni\nJk");
-            System.out.println();
-        }*/
-        else {
-            System.out.println(passwordPart + "; shape of the letter Q on the keyboard where Q is in the middle "
-                + "left of the shape starting at the top and moving left to right on each row with the Q being capitalized:\n");
-            System.out.println("123\nQ e\nasd\n   v");
-            System.out.println();
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        lengthToFill -= passwordPart.length();
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter Q on the keyboard where Q is in the middle "
+                + "left of the shape starting at the top and moving left to right on each row with the Q being capitalized:\n\n123\nQ e\nasd\n   v");
     }
-    static String letterR () {
+    static void letterR (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="456Ryfghvm";
-        /*if (lengthToFill-passwordPart.length()<0) {
-            passwordPart = "8iJk";*/
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
-            }/*
-            System.out.println(passwordPart + "; shape of the letter J on the keyboard where J is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the J being capitalized:\n");
-            System.out.println("8\ni\nJk");
-            System.out.println();
-        }*/
-        else {
-            System.out.println(passwordPart + "; shape of the letter R on the keyboard where R is the second highest on the  "
-                + "left of the shape starting at the top and moving left to right on each row with the R being capitalized:\n");
-            System.out.println("456\nR y\nfgh\nv  m");
-            System.out.println();
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        lengthToFill -= passwordPart.length();
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter R on the keyboard where R is the second highest on the  "
+                + "left of the shape starting at the top and moving left to right on each row with the R being capitalized:\n\n456\nR y\nfgh\nv  m");
     }
-    static String letterS () {
-        String passwordPart ="uiOjlm,.";
-        /*if (lengthToFill-passwordPart.length()<0) {
-            passwordPart = "8iJk";*/
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
-            }/*
-            System.out.println(passwordPart + "; shape of the letter J on the keyboard where J is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the J being capitalized:\n");
-            System.out.println("8\ni\nJk");
-            System.out.println();
-        }*/
-        else {
-            System.out.println(passwordPart + "; shape of the letter O on the keyboard where O is in the top "
-                + "right of the shape starting at the top and moving left to right on each row with the O being capitalized:\n");
-            System.out.println("uiO\nj l\nm,.");
-            System.out.println();
+    static void letterS (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
+        String passwordPart ="Sxcfgb";
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        lengthToFill -= passwordPart.length();
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter S on the keyboard where S is in the far left "
+                + "of the shape starting at the S following it's shape with the S being capitalized:\n\ns fg\nxc b");
     }
-    static String letterT () {
+    static void letterT (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="rTygb";
-        /*if (lengthToFill-passwordPart.length()<0) {
-            passwordPart = "8iJk";*/
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
-            }/*
-            System.out.println(passwordPart + "; shape of the letter J on the keyboard where J is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the J being capitalized:\n");
-            System.out.println("8\ni\nJk");
-            System.out.println();
-        }*/
-        else {
-            System.out.println(passwordPart + "; shape of the letter T on the keyboard where T is in the top "
-                + "middle of the shape starting at the top and moving left to right on each row with the T being capitalized:\n");
-            System.out.println("rTy\n g\n b");
-            System.out.println();
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        lengthToFill -= passwordPart.length();
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter T on the keyboard where T is in the top "
+                + "middle of the shape starting at the top and moving left to right on each row with the T being capitalized:\n\nrTy\n g\n b");
     }
-    static String letterU () {
+    static void letterU (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="Uojlm,.";
-        /*if (lengthToFill-passwordPart.length()<0) {
-            passwordPart = "8iJk";*/
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
-            }/*
-            System.out.println(passwordPart + "; shape of the letter J on the keyboard where J is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the J being capitalized:\n");
-            System.out.println("8\ni\nJk");
-            System.out.println();
-        }*/
-        else {
-            System.out.println(passwordPart + "; shape of the letter U on the keyboard where U is in the top "
-                + "left of the shape starting at the top and moving left to right on each row with the U being capitalized:\n");
-            System.out.println("U o\nj l\nm,.");
-            System.out.println();
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        lengthToFill -= passwordPart.length();
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter U on the keyboard where U is in the top "
+                + "left of the shape starting at the top and moving left to right on each row with the U being capitalized:\n\nU o\nj l\nm,.");
     }
-    static String letterV () {
+    static void letterV (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="etdgV";
-        /*if (lengthToFill-passwordPart.length()<0) {
-            passwordPart = "8iJk";*/
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
-            }/*
-            System.out.println(passwordPart + "; shape of the letter J on the keyboard where J is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the J being capitalized:\n");
-            System.out.println("8\ni\nJk");
-            System.out.println();
-        }*/
-        else {
-            System.out.println(passwordPart + "; shape of the letter V on the keyboard where V is in the bottom "
-                + "of the shape starting at the top and moving left to right on each row with the V being capitalized:\n");
-            System.out.println("e t\nd g\n V");
-            System.out.println();
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        lengthToFill -= passwordPart.length();
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter V on the keyboard where V is in the bottom "
+                + "of the shape starting at the top and moving left to right on each row with the V being capitalized:\n\ne t\nd g\n V");
     }
-    static String letterW () {
+    static void letterW (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="Wsxdrfv";
-        /*if (lengthToFill-passwordPart.length()<0) {
-            passwordPart = "8iJk";*/
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
-            }/*
-            System.out.println(passwordPart + "; shape of the letter J on the keyboard where J is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the J being capitalized:\n");
-            System.out.println("8\ni\nJk");
-            System.out.println();
-        }*/
-        else {
-            System.out.println(passwordPart + "; shape of the letter W on the keyboard where W is in the top "
-                + "left of the shape starting at the left and moving top to bottom on each column with the W being capitalized:\n");
-            System.out.println("W r\nsdf\nx v");
-            System.out.println();
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        lengthToFill -= passwordPart.length();
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter W on the keyboard where W is in the top "
+                + "left of the shape starting at the left and moving top to bottom on each column with the W being capitalized:\n\nW r\nsdf\nx v");
     }
-    static String letterX () {
+    static void letterX (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="wrdXv";
-        /*if (lengthToFill-passwordPart.length()<0) {
-            passwordPart = "8iJk";*/
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
-            }/*
-            System.out.println(passwordPart + "; shape of the letter J on the keyboard where J is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the J being capitalized:\n");
-            System.out.println("8\ni\nJk");
-            System.out.println();
-        }*/
-        else {
-            System.out.println(passwordPart + "; shape of the letter X on the keyboard where X is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the X being capitalized:\n");
-            System.out.println("w r\n d\nX v");
-            System.out.println();
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        lengthToFill -= passwordPart.length();
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter X on the keyboard where X is in the bottom "
+                + "left of the shape starting at the top and moving left to right on each row with the X being capitalized:\n\nw r\n d\nX v");
     }
-    static String letterY () {
+    static void letterY (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="Yijm";
-        /*if (lengthToFill-passwordPart.length()<0) {
-            passwordPart = "8iJk";*/
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
-            }/*
-            System.out.println(passwordPart + "; shape of the letter J on the keyboard where J is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the J being capitalized:\n");
-            System.out.println("8\ni\nJk");
-            System.out.println();
-        }*/
-        else {
-            System.out.println(passwordPart + "; shape of the letter Y on the keyboard where Y is in the top "
-                + "left of the shape starting at the top and moving left to right on each row with the Y being capitalized:\n");
-            System.out.println("Y i\n j\n m");
-            System.out.println();
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        lengthToFill -= passwordPart.length();
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter Y on the keyboard where Y is in the top "
+                + "left of the shape starting at the top and moving left to right on each row with the Y being capitalized:\n\nY i\n j\n m");
     }
-    static String letterZ () {
+    static void letterZ (Password pass) {
+        int length =  pass.getMaxLength()- pass.getCurrentLength();
         String passwordPart ="1234esZxcv";
-        /*if (lengthToFill-passwordPart.length()<0) {
-            passwordPart = "8iJk";*/
-            if (lengthToFill-passwordPart.length()<0) {
-                return "";
-            }/*
-            System.out.println(passwordPart + "; shape of the letter J on the keyboard where J is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the J being capitalized:\n");
-            System.out.println("8\ni\nJk");
-            System.out.println();
-        }*/
-        else {
-            System.out.println(passwordPart + "; shape of the letter Z on the keyboard where Z is in the bottom "
-                + "right of the shape starting at the top and moving left to right on each row with the Z being capitalized:\n");
-            System.out.println("1234\n  e\n s\nZxcv");
-            System.out.println();
+        if (length-passwordPart.length()<0) {
+            return;
         }
-        lengthToFill -= passwordPart.length();
-        return passwordPart;
+        pass.addToPassword(passwordPart);
+        pass.addToMemoryList("shape of the letter Z on the keyboard where Z is in the bottom "
+                + "right of the shape starting at the top and moving left to right on each row with the Z being capitalized:\n\n1234\n  e\n s\nZxcv");
     }
 }

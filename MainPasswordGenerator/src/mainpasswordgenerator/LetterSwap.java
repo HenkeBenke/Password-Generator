@@ -11,8 +11,11 @@ package mainpasswordgenerator;
  */
 public class LetterSwap {
     
-    static void stepsInAlphabet (UserInput usIn, Password pass) {
+    static void stepsInAlphabet (UserInput usIn, Password pass) {               //Not accounting for non-letters
         String textToChange = usIn.firstText;
+        if (textToChange.length()>(pass.getMaxLength()-pass.getCurrentLength())) {
+           return; 
+        }
         String returnText = "";
         char returnTextChars[] = new char [textToChange.length()];
         for (int i = 0; i < textToChange.length(); i++) {
@@ -28,40 +31,60 @@ public class LetterSwap {
             returnText+= returnTextChars[i];
         }
         pass.addToPassword(returnText);
-        pass.addToMemoryList(", the word " + textToChange + " but with every letter changed to the letter next in the alphabet");
+        pass.addToMemoryList(" the word " + textToChange + " but with every letter changed to the letter next in the alphabet");
     }
     static void stepsInAlphabet (UserInput usIn, Password pass, int steps) {
         String textToChange = usIn.firstText;
+        if (textToChange.length()>(pass.getMaxLength()-pass.getCurrentLength())) {
+           return; 
+        }
         String returnText = "";
         char returnTextChars[] = new char [textToChange.length()];
         for (int i = 0; i < textToChange.length(); i++) {
-            if (((int)textToChange.charAt(i)<91 && (int)textToChange.charAt(i)+steps>90)||(int)textToChange.charAt(i)+steps>122) {
-                returnTextChars[i] = (char)((int)textToChange.charAt(i)+steps-26);
+            if ((int)textToChange.charAt(i)>64 && (int)textToChange.charAt(i)<91) {
+                returnTextChars[i] = (char)((int)textToChange.charAt(i)+steps);
+                while(returnTextChars[i]>90) {
+                    returnTextChars[i] = (char)((int)returnTextChars[i]-26);
+                }
+            }
+            else if ((int)textToChange.charAt(i)>96 && (int)textToChange.charAt(i)<123) {
+                returnTextChars[i] = (char)((int)textToChange.charAt(i)+steps);
+                while(returnTextChars[i]>122) {
+                    returnTextChars[i] = (char)((int)returnTextChars[i]-26);
+                }
             }
             else {
-                returnTextChars[i] = (char)((int)textToChange.charAt(i)+steps);
+                returnTextChars[i] = textToChange.charAt(i);
             }
-        }
-        for (int i = 0; i < textToChange.length(); i++) {//Merge with prior loop?
-            returnText+= returnTextChars[i];
+            returnText += returnTextChars[i];
         }
         pass.addToPassword(returnText);
         pass.addToMemoryList(", the word " + textToChange + " but with every letter changed to the letter " + steps + " steps later in the alphabet");
     }
     static void incrementingStepsInAlphabet (UserInput usIn, Password pass, int incSize, int startStep) {
         String textToChange = usIn.firstText;
+        if (textToChange.length()>(pass.getMaxLength()-pass.getCurrentLength())) {
+           return; 
+        }
         String returnText = "";
         char returnTextChars[] = new char [textToChange.length()];
         for (int i = 0; i < textToChange.length(); i++) {
-            if (((int)textToChange.charAt(i)<91 && (int)textToChange.charAt(i)+(incSize*i + startStep)>90)||(int)textToChange.charAt(i)+(incSize*i + startStep)>122) {
-                returnTextChars[i] = (char)((int)textToChange.charAt(i)+(incSize*i + startStep)-26);
+            if ((int)textToChange.charAt(i)>64 && (int)textToChange.charAt(i)<91) {
+                returnTextChars[i] = (char)((int)textToChange.charAt(i)+startStep+incSize*i);
+                while(returnTextChars[i]>90) {
+                    returnTextChars[i] = (char)((int)returnTextChars[i]-26);
+                }
+            }
+            else if ((int)textToChange.charAt(i)>96 && (int)textToChange.charAt(i)<123) {
+                returnTextChars[i] = (char)((int)textToChange.charAt(i)+startStep+incSize*i);
+                while(returnTextChars[i]>122) {
+                    returnTextChars[i] = (char)((int)returnTextChars[i]-26);
+                }
             }
             else {
-                returnTextChars[i] = (char)((int)textToChange.charAt(i)+(incSize*i + startStep));
+                returnTextChars[i] = textToChange.charAt(i);
             }
-        }
-        for (int i = 0; i < textToChange.length(); i++) {//Merge with prior loop?
-            returnText+= returnTextChars[i];
+            returnText += returnTextChars[i];
         }
         pass.addToPassword(returnText);
         pass.addToMemoryList(", the word " + textToChange + " but with every letter changed to a letter later in the alphabet, the first one being " + startStep

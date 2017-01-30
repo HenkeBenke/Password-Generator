@@ -305,8 +305,7 @@ public class BasicGUI extends javax.swing.JFrame {
         }
         UserInput usIn = MainPasswordGenerator.listOfInputs.get(MainPasswordGenerator.listOfInputs.size()-1);
         usIn.setFirstText(forenameField.getText());
-        MainPasswordGenerator.encrypt.makePassword(usIn, MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1));
-        choosePasswordCombo.addItem(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1).getPasswordText());
+        MainPasswordGenerator.encrypt.makePassword(usIn, MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1), questionLbl, choosePasswordCombo);
         submit.setEnabled(true);
     }//GEN-LAST:event_submitAnswerButtActionPerformed
 

@@ -19,6 +19,7 @@ public class Password {
     List<String> passwordParts = new ArrayList<>();
     List<String> memoryMethods = new ArrayList<>();
     List<Password> formerVersions = new ArrayList<>();
+    List<Integer> usedSingleNounQuestions = new ArrayList<>();
     int lastMethodUsed = -1;
     public Password (int passLength) {
         maxLength = passLength;
@@ -35,6 +36,9 @@ public class Password {
         for (int i = 0; i < pass.getAmountOfMemoryMethods(); i++) { //Should suffice with one loop for both
             passwordParts.add(i, pass.getPasswordPart(i));
             memoryMethods.add(i, pass.getMemoryMethod(i));
+        }
+        for (int i = 0; i < pass.getAmountOfSingleNounQuestionsUsed(); i++) {
+            usedSingleNounQuestions.add(i, pass.getSingleNounQuestionUsed(i));
         }
         formerVersions.add(formerVersions.size(), pass);
     }
@@ -81,5 +85,14 @@ public class Password {
     }
     int getLastMethodUsed () {
         return lastMethodUsed;
+    }
+    int getSingleNounQuestionUsed (int index) {
+        return usedSingleNounQuestions.get(index);
+    }
+    int getAmountOfSingleNounQuestionsUsed () {
+        return usedSingleNounQuestions.size();
+    }
+    void addSingleNounUsed (int nr) {
+        usedSingleNounQuestions.add(usedSingleNounQuestions.size(), nr);
     }
 }
