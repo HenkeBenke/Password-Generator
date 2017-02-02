@@ -47,8 +47,9 @@ public class Encryptor { //Add cancel button for use during creation?
             lengthLeftToMin = 0; //To test only once, remove later obviously
         }
     }*/
-    void makePassword (UserInput input, Password pass, javax.swing.JLabel questionfield, javax.swing.JComboBox<String> passComboBox) {
+    void makePassword (UserInput input, Password pass, javax.swing.JLabel questionfield, javax.swing.JComboBox<String> passComboBox, javax.swing.JPanel quesPan, javax.swing.JButton startBut) {
         if (pass.getMinLength()-pass.getCurrentLength()<1) {
+            System.out.println("Trying to make password when it's already done");
             return;
         }
         else {  //Need to add follow questions if long rest bit that cant be filled with encryption
@@ -81,12 +82,19 @@ public class Encryptor { //Add cancel button for use during creation?
                 if (priorLength==pass.getCurrentLength()) {
                     //Move below line to the place where remaining pass length == 0
                     passComboBox.addItem(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1).getPasswordText());
+                    quesPan.setVisible(false);
+                    startBut.setEnabled(true);
                     return; //Swap for short questions
                 }
             }
         }
         if (pass.getMinLength()-pass.getCurrentLength()>1) {
             methodPicker(input, pass, questionfield);
+        }
+        else {
+            passComboBox.addItem(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1).getPasswordText());
+            quesPan.setVisible(false);
+            startBut.setEnabled(true);
         }
     }
     void methodPicker (UserInput input, Password pass, javax.swing.JLabel questionField) {
@@ -103,6 +111,7 @@ public class Encryptor { //Add cancel button for use during creation?
                     }
                     while (true) {
                         if (pass.getAmountOfSingleNounQuestionsUsed()>=QuestionCollection.singleNounBased.length) {
+                            System.out.println("Slut på frågor?");
                             break;   //What to do if out of questions?
                         }
                         int questionNr = random.nextInt(QuestionCollection.singleNounBased.length); //Use different random?

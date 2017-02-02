@@ -114,7 +114,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter A on the keyboard where A is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the A being capitalized:\n\n  23\n qwe\nA   d\n");
+                + "left of the shape starting at the top and moving left to right on each row with the A being capitalized:\n\n 23\nqwe\nA d\n\n");
     }
     static void letterB (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -124,7 +124,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter b on the keyboard where b is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the b being capitalized:\n\n5\ntyu\ng j\nBnm");
+                + "left of the shape starting at the top and moving left to right on each row with the b being capitalized:\n\n5\ntyu\ng j\nBnm\n\n");
     }
     static void letterC (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -136,12 +136,12 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
             }
             pass.addToPassword(passwordPart);
             pass.addToMemoryList("shape of the letter C on the keyboard where C is in the bottom "
-                + "right of the shape starting at the top and moving left to right on each row with the C being capitalized:\n\n er\ns\n xC");
+                + "right of the shape starting at the top and moving left to right on each row with the C being capitalized:\n\n er\ns\n xC\n\n");
         }
         else {
             pass.addToPassword(passwordPart);
             pass.addToMemoryList("shape of the letter C on the keyboard where C is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the C being capitalized:\n\nert\nd\nCvb");
+                + "left of the shape starting at the top and moving left to right on each row with the C being capitalized:\n\nert\nd\nCvb\n\n");
         }
     }
     static void letterD (Password pass) {
@@ -154,12 +154,12 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
             }
             pass.addToPassword(passwordPart);
             pass.addToMemoryList("shape of the letter D on the keyboard where D is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the D being capitalized:\n\n34\ne t\nDf");
+                + "left of the shape starting at the top and moving left to right on each row with the D being capitalized:\n\n34\ne t\nDf\n\n");
         }
         else {
             pass.addToPassword(passwordPart);
             pass.addToMemoryList("shape of the letter D on the keyboard where D is the second lowest character to the "
-                + "left with it starting at the top and moving left to right on each row with the D being capitalized:\n\n34\ne t\nD g\ncv");
+                + "left with it starting at the top and moving left to right on each row with the D being capitalized:\n\n34\ne t\nD g\ncv\n\n");
         }
     }
     static void letterE (Password pass) {
@@ -170,7 +170,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter E on the keyboard where E is in the top "
-                + "left of the shape starting at the top and moving left to right on each row with the E being capitalized:\n\nErt\ndf\ncvb");
+                + "left of the shape starting at the top and moving left to right on each row with the E being capitalized:\n\nErt\ndf\ncvb\n\n");
     }
     static void letterF (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -180,7 +180,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter F on the keyboard where F is in the bottom "
-                + "of the shape starting at the top and moving left to right on each row with the F being capitalized:\n\n456\nrt\nF");
+                + "of the shape starting at the top and moving left to right on each row with the F being capitalized:\n\n456\nrt\nF\n\n");
     }
     static void letterG (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -190,7 +190,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter G on the keyboard where G is in the middle right "
-                + "of the shape starting at G and moving in a outwards spiral with the G being capitalized:\n\n 456\ne\nd G\ncvb");
+                + "of the shape starting at G and moving in a outwards spiral with the G being capitalized:\n\n 456\ne\nd G\ncvb\n\n");
     }
     static void letterH (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -200,7 +200,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter H on the keyboard where H is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the H being capitalized:\n\n6 8\nyui\nH k");
+                + "left of the shape starting at the top and moving left to right on each row with the H being capitalized:\n\n6 8\nyui\nH k\n\n");
     }
     static void letterI (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -214,18 +214,18 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
                 }
                 pass.addToPassword(passwordPart);
                 pass.addToMemoryList("shape of the letter I on the keyboard where I is in the top "
-                + "of the shape starting at the top with the I being capitalized:\n\nI\nk");
+                + "of the shape starting at the top with the I being capitalized:\n\nI\nk\n\n");
             }
             else {
                 pass.addToPassword(passwordPart);
                 pass.addToMemoryList("shape of the letter I on the keyboard where I is in the top "
-                + "of the shape starting at the top with the I being capitalized:\n\nI\nk\n,");
+                + "of the shape starting at the top with the I being capitalized:\n\nI\nk\n,\n\n");
             }
         }
         else {
             pass.addToPassword(passwordPart);
             pass.addToMemoryList("shape of the letter I on the keyboard where I is second from the top "
-                + "in the shape starting at the top with the I being capitalized:\n\n8\nI\nk\n,");
+                + "in the shape starting at the top with the I being capitalized:\n\n8\nI\nk\n,\n\n");
         }
     }
     static void letterJ (Password pass) {
@@ -238,12 +238,12 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
             }
             pass.addToPassword(passwordPart);
             pass.addToMemoryList("shape of the letter J on the keyboard where J is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the J being capitalized:\n\n 8\n i\nJk");
+                + "left of the shape starting at the top and moving left to right on each row with the J being capitalized:\n\n 8\n i\nJk\n\n");
         }
         else {
             pass.addToPassword(passwordPart);
             pass.addToMemoryList("shape of the letter J on the keyboard where J is on the tip "
-                + "of the curving part, starting at the top and moving left to right on each row with the J being capitalized:\n\n789\n  o\nJ l\nm,.");
+                + "of the curving part, starting at the top and moving left to right on each row with the J being capitalized:\n\n789\n  o\nJ l\nm,.\n\n");
         }
     }
     static void letterK (Password pass) {
@@ -254,7 +254,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter K on the keyboard where K is in the middle "
-                + "of the shape starting at the top and moving left to right on each row with the K being capitalized:\n\nu o\njK\nm .");
+                + "of the shape starting at the top and moving left to right on each row with the K being capitalized:\n\nu o\njK\nm .\n\n");
     }
     static void letterL (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -264,7 +264,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter L on the keyboard where L is in the bottom "
-                + "right of the shape starting at the top and moving left to right on each row with the L being capitalized:\n\n8\ni\nkL");
+                + "right of the shape starting at the top and moving left to right on each row with the L being capitalized:\n\n8\ni\nkL\n\n");
     }
     static void letterM (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -274,7 +274,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter M on the keyboard where M is in the bottom "
-                + "right of the shape starting right and moving top to bottom on each column with the M being capitalized:\n\n3   7\ner yu\nd g j\nc   M");
+                + "right of the shape starting right and moving top to bottom on each column with the M being capitalized:\n\n3   7\ner yu\nd g j\nc   M\n\n");
     }
     static void letterN (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -284,7 +284,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter N on the keyboard where N is in the bottom "
-                + "right of the shape starting right and moving top to bottom on each column with the N being capitalized:\n\n3  6\ner y\nd gh\nc  N");
+                + "right of the shape starting right and moving top to bottom on each column with the N being capitalized:\n\n3  6\ner y\nd gh\nc  N\n\n");
     }
     static void letterO (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -294,7 +294,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter O on the keyboard where O is in the top "
-                + "right of the shape starting at the top and moving left to right on each row with the O being capitalized:\n\nuiO\nj l\nm,.");
+                + "right of the shape starting at the top and moving left to right on each row with the O being capitalized:\n\nuiO\nj l\nm,.\n\n");
     }
     static void letterP (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -304,7 +304,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter P lying down and mirrored on the keyboard where P is on the far "
-                + "right of the shape starting at the top and moving left to right on each row with the P being capitalized:\n\nyuioP\nh k\nnm,");
+                + "right of the shape starting at the top and moving left to right on each row with the P being capitalized:\n\nyuioP\nh k\nnm,\n\n");
     }
     static void letterQ (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -314,7 +314,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter Q on the keyboard where Q is in the middle "
-                + "left of the shape starting at the top and moving left to right on each row with the Q being capitalized:\n\n123\nQ e\nasd\n   v");
+                + "left of the shape starting at the top and moving left to right on each row with the Q being capitalized:\n\n123\nQ e\nasd\n   v\n\n");
     }
     static void letterR (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -324,7 +324,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter R on the keyboard where R is the second highest on the  "
-                + "left of the shape starting at the top and moving left to right on each row with the R being capitalized:\n\n456\nR y\nfgh\nv  m");
+                + "left of the shape starting at the top and moving left to right on each row with the R being capitalized:\n\n456\nR y\nfgh\nv  m\n\n");
     }
     static void letterS (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -334,7 +334,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter S on the keyboard where S is in the far left "
-                + "of the shape starting at the S following it's shape with the S being capitalized:\n\ns fg\nxc b");
+                + "of the shape starting at the S following it's shape with the S being capitalized:\n\ns fg\nxc b\n\n");
     }
     static void letterT (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -344,7 +344,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter T on the keyboard where T is in the top "
-                + "middle of the shape starting at the top and moving left to right on each row with the T being capitalized:\n\nrTy\n g\n b");
+                + "middle of the shape starting at the top and moving left to right on each row with the T being capitalized:\n\nrTy\n g\n b\n\n");
     }
     static void letterU (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -354,7 +354,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter U on the keyboard where U is in the top "
-                + "left of the shape starting at the top and moving left to right on each row with the U being capitalized:\n\nU o\nj l\nm,.");
+                + "left of the shape starting at the top and moving left to right on each row with the U being capitalized:\n\nU o\nj l\nm,.\n\n");
     }
     static void letterV (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -364,7 +364,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter V on the keyboard where V is in the bottom "
-                + "of the shape starting at the top and moving left to right on each row with the V being capitalized:\n\ne t\nd g\n V");
+                + "of the shape starting at the top and moving left to right on each row with the V being capitalized:\n\ne t\nd g\n V\n\n");
     }
     static void letterW (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -374,7 +374,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter W on the keyboard where W is in the top "
-                + "left of the shape starting at the left and moving top to bottom on each column with the W being capitalized:\n\nW r\nsdf\nx v");
+                + "left of the shape starting at the left and moving top to bottom on each column with the W being capitalized:\n\nW r\nsdf\nx v\n\n");
     }
     static void letterX (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -384,7 +384,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter X on the keyboard where X is in the bottom "
-                + "left of the shape starting at the top and moving left to right on each row with the X being capitalized:\n\nw r\n d\nX v");
+                + "left of the shape starting at the top and moving left to right on each row with the X being capitalized:\n\nw r\n d\nX v\n\n");
     }
     static void letterY (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -394,7 +394,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter Y on the keyboard where Y is in the top "
-                + "left of the shape starting at the top and moving left to right on each row with the Y being capitalized:\n\nY i\n j\n m");
+                + "left of the shape starting at the top and moving left to right on each row with the Y being capitalized:\n\nY i\n j\n m\n\n");
     }
     static void letterZ (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
@@ -404,6 +404,6 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
         }
         pass.addToPassword(passwordPart);
         pass.addToMemoryList("shape of the letter Z on the keyboard where Z is in the bottom "
-                + "right of the shape starting at the top and moving left to right on each row with the Z being capitalized:\n\n1234\n  e\n s\nZxcv");
+                + "right of the shape starting at the top and moving left to right on each row with the Z being capitalized:\n\n1234\n  e\n s\nZxcv\n\n");
     }
 }
