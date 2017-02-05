@@ -8,46 +8,11 @@ import java.util.Random;
  *
  * @author aa97339
  */
-public class Encryptor { //Add cancel button for use during creation?
+public class Encryptor {
     Random random = new Random();
     int availableEncryptionMethods = 3;                                         //Number of methods that can be used
     int availableEncryptAgainMethods = 2;                                       //Number of methods that can be used to encrypt a password again 
-    //public Encryptor () {}
-    /*void makePassword (UserInput input, Password pass, javax.swing.JLabel questionField) { //Add non-repeating of methods option; only using different methods when going multiple times?
-        int lengthLeftToMin = pass.getMinLength();  //Remove later
-        int i = 0;             //Remove later
-        int lastMethodUsed = -1;
-        //while (pass.getMinLength() > pass.getCurrentLength()) { 
-        while (lengthLeftToMin>0) { // Swap for above later
-            int methodPicker = random.nextInt(availableEncryptionMethods);
-            if (methodPicker == lastMethodUsed) {                               //Don't use same method in a row during one encryption
-                continue;
-            }
-            lastMethodUsed = methodPicker;
-            switch (methodPicker) { //Follow questions if long rest bit that cant be filled with encryption
-                case 1:
-                    if (!input.getQwerty()) { //Fix memory methods, and finish the uncompleted ones
-                        continue;
-                    }
-                    pass.addToPassword(PhysicalLetterPatterns.useMethod(input, pass.getMaxLength()- pass.getCurrentLength()));
-                    break;
-                case 0:     //Need to fix when going past the alpahbet (currently only accouning for a few chars past)
-                    String question = QuestionCollection.singelNounBased[random.nextInt(QuestionCollection.singelNounBased.length)]; //Use different random?
-                    questionField.setText(question);
-                    LetterSwap.stepsInAlphabet(input, pass, 1);  //Set steps to random? Or let user choose between specified and random?
-                    break;
-                case 2:     //Need to fix when going past the alpahbet (currently only accouning for a few chars past)
-                    LetterSwap.incrementingStepsInAlphabet(input, pass, 1, 1); //Set steps to random? Or let user choose between specified and random?
-                    break;
-                default:
-                    System.out.println("Error choosing encryption method");
-            }
-            lengthLeftToMin = pass.getMinLength() - pass.getCurrentLength() - i;    //Remove later
-            i++; // Remove later
-            lengthLeftToMin = 0; //To test only once, remove later obviously
-        }
-    }*/
-    void makePassword (UserInput input, Password pass, javax.swing.JLabel questionfield, javax.swing.JComboBox<String> passComboBox, javax.swing.JPanel quesPan, javax.swing.JButton startBut) {
+    void makePassword (UserInput input, Password pass, javax.swing.JLabel questionfield, javax.swing.JComboBox<String> passComboBox, javax.swing.JPanel quesPan, javax.swing.JButton startBut, javax.swing.JButton printBut, javax.swing.JButton encryptAgainBut) {
         if (pass.getMinLength()-pass.getCurrentLength()<1) {
             System.out.println("Trying to make password when it's already done");
             return;
@@ -84,6 +49,10 @@ public class Encryptor { //Add cancel button for use during creation?
                     passComboBox.addItem(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1).getPasswordText());
                     quesPan.setVisible(false);
                     startBut.setEnabled(true);
+                    if (!printBut.isEnabled()) {
+                        printBut.setEnabled(true);
+                        encryptAgainBut.setEnabled(true);
+                    }
                     return; //Swap for short questions
                 }
             }
@@ -95,12 +64,15 @@ public class Encryptor { //Add cancel button for use during creation?
             passComboBox.addItem(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1).getPasswordText());
             quesPan.setVisible(false);
             startBut.setEnabled(true);
+            if (!printBut.isEnabled()) {
+                printBut.setEnabled(true);
+            }
         }
     }
     void methodPicker (UserInput input, Password pass, javax.swing.JLabel questionField) {
         while (true) { 
             int methodNr = random.nextInt(availableEncryptionMethods);
-            if (methodNr == pass.getLastMethodUsed()) {                         //Don't use same method in a row during one encryption
+            if (methodNr == pass.getLastMethodUsed()) {                         //Don't use same method twice in a row during one encryption
                 continue;
             }
             pass.setLastMethodUsed(methodNr);
@@ -133,6 +105,7 @@ public class Encryptor { //Add cancel button for use during creation?
                 case 1:
                     while (true) {
                         if (pass.getAmountOfSingleNounQuestionsUsed()>=QuestionCollection.singleNounBased.length) {
+                            System.out.println("Slut på frågor?");
                             break;   //What to do if out of questions?
                         }
                         int questionNr = random.nextInt(QuestionCollection.singleNounBased.length); //Use different random?
@@ -154,6 +127,7 @@ public class Encryptor { //Add cancel button for use during creation?
                 case 2:
                     while (true) {
                         if (pass.getAmountOfSingleNounQuestionsUsed()>=QuestionCollection.singleNounBased.length) {
+                            System.out.println("Slut på frågor?");
                             break;   //What to do if out of questions?
                         }
                         int questionNr = random.nextInt(QuestionCollection.singleNounBased.length); //Use different random?
@@ -204,7 +178,7 @@ public class Encryptor { //Add cancel button for use during creation?
         }
         
     }
-    void encryptAgain (UserInput input, int passNr, int maxLength, int interval) {
+    /*void encryptAgain (UserInput input, int passNr, int maxLength, int interval) {
         Password pass = MainPasswordGenerator.listOfPasswords.get(passNr);
         Password passToMakeEncryptionOn = new Password (pass,passNr);
         passToMakeEncryptionOn.makeLonger(maxLength, interval);
@@ -217,6 +191,24 @@ public class Encryptor { //Add cancel button for use during creation?
                 break;
             case 1:
                 LetterSwap.incrementingStepsInAlphabet(input, pass, 1, 1); //Set steps to random? Or let user choose between specified and random? Set different random based on complexity chosen?
+                break;
+            default:
+                System.out.println("Error choosing encrypt again method");
+        }
+        
+    }*/
+    void encryptAgain (UserInput input, int passNr) {
+        Password pass = MainPasswordGenerator.listOfPasswords.get(passNr);
+        Password passToMakeEncryptionOn = new Password (pass);
+        UserInput usIn = new UserInput(input);
+        MainPasswordGenerator.listOfPasswords.add(MainPasswordGenerator.listOfPasswords.size(), passToMakeEncryptionOn);
+        MainPasswordGenerator.listOfInputs.add(MainPasswordGenerator.listOfInputs.size(),usIn);
+        switch (availableEncryptAgainMethods) {
+            case 0:
+                LetterSwap.stepsInAlphabet(usIn, pass, 1);  //Set steps to random? Or let user choose between specified and random? Set different random based on complexity chosen?
+                break;
+            case 1:
+                LetterSwap.incrementingStepsInAlphabet(usIn, pass, 1, 1); //Set steps to random? Or let user choose between specified and random? Set different random based on complexity chosen?
                 break;
             default:
                 System.out.println("Error choosing encrypt again method");

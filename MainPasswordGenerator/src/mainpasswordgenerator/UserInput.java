@@ -18,6 +18,12 @@ public class UserInput {
         qwerty = qwe;
         variedMethods = varMet;
     }
+    public UserInput (UserInput usIn) {
+        qwerty = usIn.getQwerty();
+        //Varied methods
+        firstText = usIn.getFirstText();
+        //Is pass to encrypt again needed?
+    }
     String getFirstText () {
         return firstText;
     }

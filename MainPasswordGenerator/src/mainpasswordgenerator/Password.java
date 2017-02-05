@@ -20,6 +20,7 @@ public class Password {
     List<String> memoryMethods = new ArrayList<>();
     List<Password> formerVersions = new ArrayList<>();
     List<Integer> usedSingleNounQuestions = new ArrayList<>();
+    List<Integer> skippedSingleNounQuestions = new ArrayList<>();
     int lastMethodUsed = -1;
     public Password (int passLength) {
         maxLength = passLength;
@@ -29,11 +30,11 @@ public class Password {
         minLength = min;
         maxLength = max;
     }
-    public Password (Password pass, int passNr) {                                           //For copying another password
+    public Password (Password pass) {    //Is passNR needed?                           //For copying another password
         maxLength = pass.getMaxLength();
         minLength = pass.getMinLength();
         passwordText = pass.getPasswordText();
-        for (int i = 0; i < pass.getAmountOfMemoryMethods(); i++) { //Should suffice with one loop for both
+        for (int i = 0; i < pass.getAmountOfMemoryMethods(); i++) { //Should suffice with one loop for both parts and methods
             passwordParts.add(i, pass.getPasswordPart(i));
             memoryMethods.add(i, pass.getMemoryMethod(i));
         }
@@ -41,6 +42,10 @@ public class Password {
             usedSingleNounQuestions.add(i, pass.getSingleNounQuestionUsed(i));
         }
         formerVersions.add(formerVersions.size(), pass);
+        for (int i = 0; i < pass.getSkippedSingleNounAmount(); i++) {
+            skippedSingleNounQuestions.add(i, pass.getSkippedSingleNoun(i));
+        }
+        lastMethodUsed = pass.getLastMethodUsed();
     }
     int getMaxLength () {
         return maxLength;
@@ -94,5 +99,24 @@ public class Password {
     }
     void addSingleNounUsed (int nr) {
         usedSingleNounQuestions.add(usedSingleNounQuestions.size(), nr);
+    }
+    int removeLastUsedNoun () {                                                 //Utilized when skip button is used
+        return usedSingleNounQuestions.remove(usedSingleNounQuestions.size()-1);
+    }
+    int getSkippedSingleNoun (int index) {
+        return skippedSingleNounQuestions.get(index);
+    }
+    int getSkippedSingleNounAmount () {
+        return skippedSingleNounQuestions.size();
+    }
+    void addSkippedSingleNoun (int nr) {
+        skippedSingleNounQuestions.add(skippedSingleNounQuestions.size(),nr);
+    }
+    void clearSkippedSingleNoun () {
+        int amountToRemove = skippedSingleNounQuestions.size()-1;
+        for (int i = 0; i < amountToRemove ; i++) {
+            skippedSingleNounQuestions.remove(0);
+            System.out.println("Skipped left: " + skippedSingleNounQuestions.size());
+        }
     }
 }
