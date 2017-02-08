@@ -119,4 +119,7 @@ public class Password {
             System.out.println("Skipped left: " + skippedSingleNounQuestions.size());
         }
     }
+    void wipePassText () {                                                      //For encryptagain
+        passwordText = "";
+    }
 }

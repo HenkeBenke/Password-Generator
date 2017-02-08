@@ -8,11 +8,11 @@ import java.util.Random;
  *
  * @author aa97339
  */
-public class Encryptor {
+public class Encryptor { //Seems to stop too early sometimes; length is static 10, password is currently 8 chars and it doesn't ask another question
     Random random = new Random();
     int availableEncryptionMethods = 3;                                         //Number of methods that can be used
     int availableEncryptAgainMethods = 2;                                       //Number of methods that can be used to encrypt a password again 
-    void makePassword (UserInput input, Password pass, javax.swing.JLabel questionfield, javax.swing.JComboBox<String> passComboBox, javax.swing.JPanel quesPan, javax.swing.JButton startBut, javax.swing.JButton printBut, javax.swing.JButton encryptAgainBut) {
+    void makePassword (UserInput input, Password pass, javax.swing.JLabel questionfield, javax.swing.JComboBox<String> passComboBox, javax.swing.JPanel quesPan, javax.swing.JButton startBut, javax.swing.JButton printBut, javax.swing.JButton encryptAgainBut, javax.swing.JButton makeLongerBut) {
         if (pass.getMinLength()-pass.getCurrentLength()<1) {
             System.out.println("Trying to make password when it's already done");
             return;
@@ -49,10 +49,9 @@ public class Encryptor {
                     passComboBox.addItem(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1).getPasswordText());
                     quesPan.setVisible(false);
                     startBut.setEnabled(true);
-                    if (!printBut.isEnabled()) {
-                        printBut.setEnabled(true);
-                        encryptAgainBut.setEnabled(true);
-                    }
+                    printBut.setEnabled(true);
+                    encryptAgainBut.setEnabled(true);
+                    makeLongerBut.setEnabled(true);
                     return; //Swap for short questions
                 }
             }
@@ -64,9 +63,9 @@ public class Encryptor {
             passComboBox.addItem(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1).getPasswordText());
             quesPan.setVisible(false);
             startBut.setEnabled(true);
-            if (!printBut.isEnabled()) {
-                printBut.setEnabled(true);
-            }
+            printBut.setEnabled(true);
+            encryptAgainBut.setEnabled(true);
+            makeLongerBut.setEnabled(true);
         }
     }
     void methodPicker (UserInput input, Password pass, javax.swing.JLabel questionField) {
@@ -197,23 +196,24 @@ public class Encryptor {
         }
         
     }*/
-    void encryptAgain (UserInput input, int passNr) {
-        Password pass = MainPasswordGenerator.listOfPasswords.get(passNr);
-        Password passToMakeEncryptionOn = new Password (pass);
-        UserInput usIn = new UserInput(input);
+    void encryptAgain (int passNr, javax.swing.JComboBox passComboBox) {
+        Password passToMakeEncryptionOn = new Password (MainPasswordGenerator.listOfPasswords.get(passNr));
+        UserInput usIn = new UserInput(MainPasswordGenerator.listOfInputs.get(passNr));
+        usIn.setFirstText(passToMakeEncryptionOn.getPasswordText());
         MainPasswordGenerator.listOfPasswords.add(MainPasswordGenerator.listOfPasswords.size(), passToMakeEncryptionOn);
         MainPasswordGenerator.listOfInputs.add(MainPasswordGenerator.listOfInputs.size(),usIn);
-        switch (availableEncryptAgainMethods) {
+        passToMakeEncryptionOn.wipePassText();
+        switch (random.nextInt(availableEncryptAgainMethods)) {
             case 0:
-                LetterSwap.stepsInAlphabet(usIn, pass, 1);  //Set steps to random? Or let user choose between specified and random? Set different random based on complexity chosen?
+                LetterSwap.stepsInAlphabet(usIn, passToMakeEncryptionOn, 1);  //Set steps to random? Or let user choose between specified and random? Set different random based on complexity chosen?
                 break;
             case 1:
-                LetterSwap.incrementingStepsInAlphabet(usIn, pass, 1, 1); //Set steps to random? Or let user choose between specified and random? Set different random based on complexity chosen?
+                LetterSwap.incrementingStepsInAlphabet(usIn, passToMakeEncryptionOn, 1, 1); //Set steps to random? Or let user choose between specified and random? Set different random based on complexity chosen?
                 break;
             default:
                 System.out.println("Error choosing encrypt again method");
         }
-        
+        passComboBox.addItem(passToMakeEncryptionOn.getPasswordText());
     }
     void test (String name) {                                                   //First letter of every word + signs except spaces
         int amountOfDifferentSentences = 3;

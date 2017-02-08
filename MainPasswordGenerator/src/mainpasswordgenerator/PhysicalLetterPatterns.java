@@ -204,7 +204,7 @@ public class PhysicalLetterPatterns { //Has all qwerty same layout (åäö part)
     }
     static void letterI (Password pass) {
         int length =  pass.getMaxLength()- pass.getCurrentLength();
-        String passwordPart ="68yuiHk";
+        String passwordPart ="8Ik,";
         if (length-passwordPart.length()<0) {
             passwordPart = "Ik,";
             if (length-passwordPart.length()<0) {
