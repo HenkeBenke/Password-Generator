@@ -417,7 +417,13 @@ public class BasicGUI extends javax.swing.JFrame {
         }
         UserInput usIn = MainPasswordGenerator.listOfInputs.get(MainPasswordGenerator.listOfInputs.size()-1);
         usIn.setFirstText(forenameField.getText());
-        MainPasswordGenerator.encrypt.makePassword(usIn, MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1), questionLbl, choosePasswordCombo, questionPanel, submit, showPassword, encryptAgainBut, makeLongerBut);
+        Password pass = MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1);
+        if (MainPasswordGenerator.encrypt.usingShortQuestions) {
+            MainPasswordGenerator.encrypt.chooseShortQuestionMethod(pass, usIn, questionLbl, choosePasswordCombo, questionPanel, submit, showPassword, encryptAgainBut, makeLongerBut);
+        }
+        else {
+            MainPasswordGenerator.encrypt.makePassword(usIn, pass, questionLbl, choosePasswordCombo, questionPanel, submit, showPassword, encryptAgainBut, makeLongerBut);
+        }
     }//GEN-LAST:event_submitAnswerButtActionPerformed
 
     private void cancelButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButActionPerformed

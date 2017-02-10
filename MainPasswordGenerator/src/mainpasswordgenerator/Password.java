@@ -22,6 +22,8 @@ public class Password {
     List<Integer> usedSingleNounQuestions = new ArrayList<>();
     List<Integer> skippedSingleNounQuestions = new ArrayList<>();
     int lastMethodUsed = -1;
+    int lastShortMethodUsed = -1;
+    int nextShortLength = 0;
     public Password (int passLength) {
         maxLength = passLength;
         minLength = passLength;
@@ -46,6 +48,7 @@ public class Password {
             skippedSingleNounQuestions.add(i, pass.getSkippedSingleNoun(i));
         }
         lastMethodUsed = pass.getLastMethodUsed();
+        lastShortMethodUsed = pass.getLastShortMethodUsed();
     }
     int getMaxLength () {
         return maxLength;
@@ -91,6 +94,12 @@ public class Password {
     int getLastMethodUsed () {
         return lastMethodUsed;
     }
+    void setLastShortMethodUsed (int index) {
+        lastShortMethodUsed = index;
+    }
+    int getLastShortMethodUsed () {
+        return lastShortMethodUsed;
+    }
     int getSingleNounQuestionUsed (int index) {
         return usedSingleNounQuestions.get(index);
     }
@@ -121,5 +130,11 @@ public class Password {
     }
     void wipePassText () {                                                      //For encryptagain
         passwordText = "";
+    }
+    void setNextShortLength (int length) {
+        nextShortLength = length;
+    }
+    int getNextSHortLength () {
+        return nextShortLength;
     }
 }

@@ -12,6 +12,7 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
     Random random = new Random();
     int availableEncryptionMethods = 3;                                         //Number of methods that can be used
     int availableEncryptAgainMethods = 2;                                       //Number of methods that can be used to encrypt a password again 
+    boolean usingShortQuestions = false;
     void makePassword (UserInput input, Password pass, javax.swing.JLabel questionfield, javax.swing.JComboBox<String> passComboBox, javax.swing.JPanel quesPan, javax.swing.JButton startBut, javax.swing.JButton printBut, javax.swing.JButton encryptAgainBut, javax.swing.JButton makeLongerBut) {
         if (pass.getMinLength()-pass.getCurrentLength()<1) {
             System.out.println("Trying to make password when it's already done");
@@ -46,12 +47,14 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
                 }
                 if (priorLength==pass.getCurrentLength()) {
                     //Move below line to the place where remaining pass length == 0
-                    passComboBox.addItem(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1).getPasswordText());
+                    /*passComboBox.addItem(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1).getPasswordText());
                     quesPan.setVisible(false);
                     startBut.setEnabled(true);
                     printBut.setEnabled(true);
                     encryptAgainBut.setEnabled(true);
                     makeLongerBut.setEnabled(true);
+                    usingShortQuestions = false;*/
+                    chooseShortQuestionMethod(pass, input, questionfield, passComboBox, quesPan, startBut, printBut, encryptAgainBut, makeLongerBut);//Need to check for already asked question / remove it
                     return; //Swap for short questions
                 }
             }
@@ -60,12 +63,14 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
             methodPicker(input, pass, questionfield);
         }
         else {
-            passComboBox.addItem(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1).getPasswordText());
+            /*passComboBox.addItem(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1).getPasswordText());
             quesPan.setVisible(false);
             startBut.setEnabled(true);
             printBut.setEnabled(true);
             encryptAgainBut.setEnabled(true);
             makeLongerBut.setEnabled(true);
+            usingShortQuestions = false;*/
+            System.out.println("Should never go here roughly line 70 encryptor...");
         }
     }
     void methodPicker (UserInput input, Password pass, javax.swing.JLabel questionField) {
@@ -176,6 +181,128 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
             }
         }
         
+    }
+    void shortQuestionPicker (Password pass, javax.swing.JLabel questionField) {
+        int remainingLengthToMax = pass.getMaxLength()-pass.getCurrentLength();
+        if (pass.getMinLength()-pass.getCurrentLength()>0) { //Shouldn't be necessary right?
+            int lengthToFillNext = random.nextInt(remainingLengthToMax)+1;
+            pass.setNextShortLength(lengthToFillNext);
+            if (remainingLengthToMax<0) {
+                System.out.println("Max length exceded somehow...");
+            }
+            else if (remainingLengthToMax==0) {
+                System.out.println("Why short question?");
+            }
+            else if (lengthToFillNext==1) { //Make correct questions later
+                while (true) {
+                        if (pass.getAmountOfSingleNounQuestionsUsed()>=QuestionCollection.singleNounBased.length) {
+                            System.out.println("Slut på frågor?");
+                            break;   //What to do if out of questions?
+                        }
+                        int questionNr = random.nextInt(QuestionCollection.singleNounBased.length); //Use different random?
+                        boolean used = false;
+                        for (int i = 0; i < pass.getAmountOfSingleNounQuestionsUsed(); i++) {
+                            if (pass.getSingleNounQuestionUsed(i)==questionNr) {
+                                used = true;
+                                break;
+                            }
+                        }
+                        if (used) {
+                            continue;
+                        }
+                        questionField.setText(QuestionCollection.singleNounBased[questionNr]);
+                        pass.addSingleNounUsed(questionNr);
+                        break;
+                    }
+            }
+            else if (lengthToFillNext==2) { //Make correct questions later
+                while (true) {
+                        if (pass.getAmountOfSingleNounQuestionsUsed()>=QuestionCollection.singleNounBased.length) {
+                            System.out.println("Slut på frågor?");
+                            break;   //What to do if out of questions?
+                        }
+                        int questionNr = random.nextInt(QuestionCollection.singleNounBased.length); //Use different random?
+                        boolean used = false;
+                        for (int i = 0; i < pass.getAmountOfSingleNounQuestionsUsed(); i++) {
+                            if (pass.getSingleNounQuestionUsed(i)==questionNr) {
+                                used = true;
+                                break;
+                            }
+                        }
+                        if (used) {
+                            continue;
+                        }
+                        questionField.setText(QuestionCollection.singleNounBased[questionNr]);
+                        pass.addSingleNounUsed(questionNr);
+                        break;
+                    }
+            }
+            else if (lengthToFillNext==3) { //Make correct questions later
+                while (true) {
+                        if (pass.getAmountOfSingleNounQuestionsUsed()>=QuestionCollection.singleNounBased.length) {
+                            System.out.println("Slut på frågor?");
+                            break;   //What to do if out of questions?
+                        }
+                        int questionNr = random.nextInt(QuestionCollection.singleNounBased.length); //Use different random?
+                        boolean used = false;
+                        for (int i = 0; i < pass.getAmountOfSingleNounQuestionsUsed(); i++) {
+                            if (pass.getSingleNounQuestionUsed(i)==questionNr) {
+                                used = true;
+                                break;
+                            }
+                        }
+                        if (used) {
+                            continue;
+                        }
+                        questionField.setText(QuestionCollection.singleNounBased[questionNr]);
+                        pass.addSingleNounUsed(questionNr);
+                        break;
+                    }
+            }
+            else {
+
+            }
+        }
+        
+    }
+    void chooseShortQuestionMethod (Password pass, UserInput usIn, javax.swing.JLabel questionField, javax.swing.JComboBox<String> passComboBox, javax.swing.JPanel quesPan, javax.swing.JButton startBut, javax.swing.JButton printBut, javax.swing.JButton encryptAgainBut, javax.swing.JButton makeLongerBut) {//Look over parameters also NEED TO MAKE USER ANSWER CHECK FOR LENGTH TO GET LONG ENOUGH ANSWER
+        if (pass.getMinLength()-pass.getCurrentLength()>0) {
+            int length;
+            if (pass.getNextSHortLength()==0) {
+                length = random.nextInt(pass.getMaxLength()-pass.getCurrentLength()+1);
+            }
+            else {
+                length = pass.getNextSHortLength();
+            }
+            usingShortQuestions = true;
+            int availableShortQuestionMethods = 2;//Set to correct amount later
+            int method;
+            while (true) {
+                method = random.nextInt(availableShortQuestionMethods);
+                if (method==pass.getLastShortMethodUsed()) {
+                   continue; 
+                }
+                pass.setLastShortMethodUsed(method);
+                break;
+            }
+            switch (method) {
+                case 0:
+                    ShortQuestionMethods.takeFirstCharacter(pass, length, usIn);
+                    break;
+                case 1:
+                    ShortQuestionMethods.takeLastCharacterLast(pass, length, usIn);
+            }
+            shortQuestionPicker(pass, questionField);
+        }
+        else {
+            passComboBox.addItem(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1).getPasswordText());
+            quesPan.setVisible(false);
+            startBut.setEnabled(true);
+            printBut.setEnabled(true);
+            encryptAgainBut.setEnabled(true);
+            makeLongerBut.setEnabled(true);
+            usingShortQuestions = false;
+        }
     }
     /*void encryptAgain (UserInput input, int passNr, int maxLength, int interval) {
         Password pass = MainPasswordGenerator.listOfPasswords.get(passNr);

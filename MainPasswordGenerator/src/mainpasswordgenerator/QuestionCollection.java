@@ -80,4 +80,13 @@ public class QuestionCollection {   //Use like instead of favourite in questions
         "What's your favourite color? (If multiworded, write as one)",
         ""
     };
+    static String[] oneLetterAnswer = {
+        
+    };
+    static String[] twoLetterAnswer = {
+        
+    };
+    static String [] threeLetterAnswer = {
+        
+    };
 }
