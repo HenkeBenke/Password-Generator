@@ -152,7 +152,7 @@ public class ShortQuestionMethods {
         }
         pass.addToPassword(partToAdd);
         if (length==1) {
-            pass.addToMemoryList(",the last cahracter of the word "+usIn.getFirstText());
+            pass.addToMemoryList(",the last character of the word "+usIn.getFirstText());
         }
         else {
             pass.addToMemoryList(", the last "+length+" characters of the word "+usIn.getFirstText()+" with the last character of the word being the last to be added");

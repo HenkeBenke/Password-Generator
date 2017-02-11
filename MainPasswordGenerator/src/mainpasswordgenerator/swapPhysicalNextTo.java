@@ -11,7 +11,7 @@ import java.util.Random;
  *
  * @author aa97339
  */
-public class swapPhysicalNextTo {
+public class SwapPhysicalNextTo {
     static void useMethod (UserInput input, Password pass) {
         String textToReturn = "";
         int letterNumber;
@@ -134,18 +134,18 @@ public class swapPhysicalNextTo {
         if (steps==1) {
             switch (direction) {
                 case "up":
-                    returnChar = Integer.toString(letterNr);
+                    returnChar = Integer.toString(letterNr+16);
                     break;
                 case "right":
-
+                    returnChar = Integer.toString(letterNr+18);
                     break;
 
                 case "down":
-
+                    returnChar = Integer.toString(letterNr+25);
                     break;
 
                 case "left":
-
+                    returnChar = Integer.toString(letterNr+11);
                     break;
             }
         }
