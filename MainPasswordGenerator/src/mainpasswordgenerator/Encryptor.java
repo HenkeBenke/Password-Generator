@@ -10,7 +10,7 @@ import java.util.Random;
  */
 public class Encryptor { //Seems to stop too early sometimes; length is static 10, password is currently 8 chars and it doesn't ask another question
     Random random = new Random();
-    int availableEncryptionMethods = 3;                                         //Number of methods that can be used
+    int availableEncryptionMethods = 5;                                         //Number of methods that can be used
     int availableEncryptAgainMethods = 2;                                       //Number of methods that can be used to encrypt a password again 
     boolean usingShortQuestions = false;
     void makePassword (UserInput input, Password pass, javax.swing.JLabel questionfield, javax.swing.JComboBox<String> passComboBox, javax.swing.JPanel quesPan, javax.swing.JButton startBut, javax.swing.JButton printBut, javax.swing.JButton encryptAgainBut, javax.swing.JButton makeLongerBut) {
@@ -30,6 +30,12 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
                 case 2:
                     LetterSwap.incrementingStepsInAlphabet(input, pass, 1, 1); //Set steps to random? Or let user choose between specified and random? Set different random based on complexity chosen?
                     break;
+                case 3:
+                    AddLetterInPattern.addABC(pass, input, 2); //Set interval to random?
+                    break;
+                case 4:
+                    AddLetterInPattern.banditLanguage(pass, input);
+                    break;
                 default:
                     System.out.println("Error picking encryption method");
             }
@@ -44,6 +50,14 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
                     case 2:
                         tryOtherSingleNounBased(input, pass);
                         break;
+                    case 3:
+                        tryOtherSingleNounBased(input, pass);
+                        break;
+                    case 4:
+                        tryOtherSingleNounBased(input, pass);
+                        break;
+                    case 5:
+                        tryOtherSingleNounBased(input, pass);
                 }
                 if (priorLength==pass.getCurrentLength()) {
                     //Move below line to the place where remaining pass length == 0
@@ -63,14 +77,15 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
             methodPicker(input, pass, questionfield);
         }
         else {
-            /*passComboBox.addItem(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1).getPasswordText());
+            passComboBox.addItem(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1).getPasswordText());
             quesPan.setVisible(false);
             startBut.setEnabled(true);
             printBut.setEnabled(true);
             encryptAgainBut.setEnabled(true);
             makeLongerBut.setEnabled(true);
-            usingShortQuestions = false;*/
-            System.out.println("Should never go here roughly line 70 encryptor...");
+            //usingShortQuestions = false;  Shouldnt be needed
+            System.out.println("Length is: " + pass.getCurrentLength()); //Remove later
+            System.out.println("Using short questions: " +usingShortQuestions); //Remove later
         }
     }
     void methodPicker (UserInput input, Password pass, javax.swing.JLabel questionField) {
@@ -101,6 +116,17 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
                         if (used) {
                             continue;
                         }
+                        else {
+                            for (int i = 0; i < pass.getSkippedSingleNounAmount(); i++) {
+                                if (pass.getSkippedSingleNoun(i)==questionNr) {
+                                    used = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (used) {
+                            continue;
+                        }
                         questionField.setText(QuestionCollection.singleNounBased[questionNr]);
                         pass.addSingleNounUsed(questionNr);
                         break;
@@ -123,6 +149,17 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
                         if (used) {
                             continue;
                         }
+                        else {
+                            for (int i = 0; i < pass.getSkippedSingleNounAmount(); i++) {
+                                if (pass.getSkippedSingleNoun(i)==questionNr) {
+                                    used = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (used) {
+                            continue;
+                        }
                         questionField.setText(QuestionCollection.singleNounBased[questionNr]);
                         pass.addSingleNounUsed(questionNr);
                         break;
@@ -140,6 +177,119 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
                             if (pass.getSingleNounQuestionUsed(i)==questionNr) {
                                 used = true;
                                 break;
+                            }
+                        }
+                        if (used) {
+                            continue;
+                        }
+                        else {
+                            for (int i = 0; i < pass.getSkippedSingleNounAmount(); i++) {
+                                if (pass.getSkippedSingleNoun(i)==questionNr) {
+                                    used = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (used) {
+                            continue;
+                        }
+                        questionField.setText(QuestionCollection.singleNounBased[questionNr]);
+                        pass.addSingleNounUsed(questionNr);
+                        break;
+                    }
+                    break;
+                case 3:
+                    while (true) {
+                        if (pass.getAmountOfSingleNounQuestionsUsed()>=QuestionCollection.singleNounBased.length) {
+                            System.out.println("Slut på frågor?");
+                            break;   //What to do if out of questions?
+                        }
+                        int questionNr = random.nextInt(QuestionCollection.singleNounBased.length); //Use different random?
+                        boolean used = false;
+                        for (int i = 0; i < pass.getAmountOfSingleNounQuestionsUsed(); i++) {
+                            if (pass.getSingleNounQuestionUsed(i)==questionNr) {
+                                used = true;
+                                break;
+                            }
+                        }
+                        if (used) {
+                            continue;
+                        }
+                        else {
+                            for (int i = 0; i < pass.getSkippedSingleNounAmount(); i++) {
+                                if (pass.getSkippedSingleNoun(i)==questionNr) {
+                                    used = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (used) {
+                            continue;
+                        }
+                        questionField.setText(QuestionCollection.singleNounBased[questionNr]);
+                        pass.addSingleNounUsed(questionNr);
+                        break;
+                    }
+                    break;
+                case 4:
+                    while (true) {
+                        if (pass.getAmountOfSingleNounQuestionsUsed()>=QuestionCollection.singleNounBased.length) {
+                            System.out.println("Slut på frågor?");
+                            break;   //What to do if out of questions?
+                        }
+                        int questionNr = random.nextInt(QuestionCollection.singleNounBased.length); //Use different random?
+                        boolean used = false;
+                        for (int i = 0; i < pass.getAmountOfSingleNounQuestionsUsed(); i++) {
+                            if (pass.getSingleNounQuestionUsed(i)==questionNr) {
+                                used = true;
+                                break;
+                            }
+                        }
+                        if (used) {
+                            continue;
+                        }
+                        else {
+                            for (int i = 0; i < pass.getSkippedSingleNounAmount(); i++) {
+                                if (pass.getSkippedSingleNoun(i)==questionNr) {
+                                    used = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (used) {
+                            continue;
+                        }
+                        questionField.setText(QuestionCollection.singleNounBased[questionNr]);
+                        pass.addSingleNounUsed(questionNr);
+                        break;
+                    }
+                    break;
+                case 5:
+                    if (!input.getQwerty()) {
+                        continue;
+                    }
+                    while (true) {
+                        if (pass.getAmountOfSingleNounQuestionsUsed()>=QuestionCollection.singleNounBased.length) {
+                            System.out.println("Slut på frågor?");
+                            break;   //What to do if out of questions?
+                        }
+                        int questionNr = random.nextInt(QuestionCollection.singleNounBased.length); //Use different random?
+                        boolean used = false;
+                        for (int i = 0; i < pass.getAmountOfSingleNounQuestionsUsed(); i++) {
+                            if (pass.getSingleNounQuestionUsed(i)==questionNr) {
+                                used = true;
+                                break;
+                            }
+                        }
+                        if (used) {
+                            continue;
+                        }
+                        else {
+                            for (int i = 0; i < pass.getSkippedSingleNounAmount(); i++) {
+                                if (pass.getSkippedSingleNoun(i)==questionNr) {
+                                    used = true;
+                                    break;
+                                }
                             }
                         }
                         if (used) {
