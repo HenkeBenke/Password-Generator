@@ -415,8 +415,10 @@ public class BasicGUI extends javax.swing.JFrame {
         else if (false) { //Add code for encrypt again compatability
             
         }
+        System.out.println("Answered"); //Remove later
         UserInput usIn = MainPasswordGenerator.listOfInputs.get(MainPasswordGenerator.listOfInputs.size()-1);
         usIn.setFirstText(forenameField.getText());
+        forenameField.setText(""); //Should work to have it here
         Password pass = MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1);
         if (MainPasswordGenerator.encrypt.usingShortQuestions) {
             MainPasswordGenerator.encrypt.chooseShortQuestionMethod(pass, usIn, questionLbl, choosePasswordCombo, questionPanel, submit, showPassword, encryptAgainBut, makeLongerBut);

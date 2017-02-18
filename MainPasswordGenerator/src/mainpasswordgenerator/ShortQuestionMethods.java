@@ -10,7 +10,7 @@ package mainpasswordgenerator;
  * @author aa97339
  */
 public class ShortQuestionMethods {
-    static void takeFirstCharacter (Password pass, int length, UserInput usIn) {
+    static void takeFirstCharacter (Password pass, int length, UserInput usIn) { //Add support for more than 3 chars?
         String partToAdd = "";
         int charNr = 0;
         if (length==1) {
@@ -44,7 +44,7 @@ public class ShortQuestionMethods {
             partToAdd += usIn.getFirstText().charAt(charNr);
             partToAdd += usIn.getFirstText().charAt(charNr+1);
         }
-        else if (length==3) {
+        else  { //if (length==3)
             while (usIn.getFirstText().charAt(charNr+2)==' ' || usIn.getFirstText().charAt(charNr+1)==' ' || usIn.getFirstText().charAt(charNr)==' ') {
                 charNr++;
                 if (charNr+2==usIn.getFirstText().length()) {
@@ -73,9 +73,9 @@ public class ShortQuestionMethods {
             partToAdd += usIn.getFirstText().charAt(charNr+1);
             partToAdd += usIn.getFirstText().charAt(charNr+2);
         }
-        else {
+        /*else {
             
-        }
+        }*/
         pass.addToPassword(partToAdd);
         if (length==1) {
             pass.addToMemoryList(",the first character of the word "+usIn.getFirstText());
@@ -84,7 +84,7 @@ public class ShortQuestionMethods {
             pass.addToMemoryList(", the first "+length+" characters of the word "+usIn.getFirstText());
         }
     }
-    static void takeLastCharacterLast (Password pass, int length, UserInput usIn) {
+    static void takeLastCharacterLast (Password pass, int length, UserInput usIn) { //Add support for more than 3 chars?
         String partToAdd = "";
         int charNr = usIn.getFirstText().length()-1;
         if (length==1) {
@@ -118,7 +118,7 @@ public class ShortQuestionMethods {
             partToAdd += usIn.getFirstText().charAt(charNr-1);
             partToAdd += usIn.getFirstText().charAt(charNr);
         }
-        else if (length==3) {
+        else  { //if (length==3)
             while (usIn.getFirstText().charAt(charNr-2)==' ' || usIn.getFirstText().charAt(charNr-1)==' ' || usIn.getFirstText().charAt(charNr)==' ') {
                 charNr--;
                 if (charNr-2==-1) {
@@ -147,9 +147,9 @@ public class ShortQuestionMethods {
             partToAdd += usIn.getFirstText().charAt(charNr-1);
             partToAdd += usIn.getFirstText().charAt(charNr);
         }
-        else {
+        /*else {
             
-        }
+        }*/
         pass.addToPassword(partToAdd);
         if (length==1) {
             pass.addToMemoryList(",the last character of the word "+usIn.getFirstText());

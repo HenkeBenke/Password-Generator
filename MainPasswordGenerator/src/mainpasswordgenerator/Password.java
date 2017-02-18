@@ -125,7 +125,7 @@ public class Password {
         int amountToRemove = skippedSingleNounQuestions.size()-1;
         for (int i = 0; i < amountToRemove ; i++) {
             skippedSingleNounQuestions.remove(0);
-            System.out.println("Skipped left: " + skippedSingleNounQuestions.size());
+            //System.out.println("Skipped left: " + skippedSingleNounQuestions.size()); To be removed
         }
     }
     void wipePassText () {                                                      //For encryptagain
@@ -134,7 +134,7 @@ public class Password {
     void setNextShortLength (int length) {
         nextShortLength = length;
     }
-    int getNextSHortLength () {
+    int getNextShortLength () {
         return nextShortLength;
     }
 }

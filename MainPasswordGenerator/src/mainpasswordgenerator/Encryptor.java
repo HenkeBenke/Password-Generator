@@ -7,8 +7,9 @@ import java.util.Random;
 /**
  *
  * @author aa97339
- */
-public class Encryptor { //Seems to stop too early sometimes; length is static 10, password is currently 8 chars and it doesn't ask another question
+ */                     //Have to click twice on submit answer for last method to make it finish? Seems to ask last time when it's done or something SHOULD BE FIXED
+                        //Also seems like question might reoccur although they shouldn't
+public class Encryptor { //Seems to stop too early sometimes; length is static 10, password is currently 8 chars and it doesn't ask another question SHOULD BE FIXED I THINK
     Random random = new Random();
     int availableEncryptionMethods = 5;                                         //Number of methods that can be used
     int availableEncryptAgainMethods = 2;                                       //Number of methods that can be used to encrypt a password again 
@@ -18,7 +19,7 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
             System.out.println("Trying to make password when it's already done");
             return;
         }
-        else {  //Need to add follow questions if long rest bit that cant be filled with encryption
+        else {
             int priorLength = pass.getCurrentLength();
             switch (pass.getLastMethodUsed()) {
                 case 0: //Maybe make better memory methods text
@@ -41,10 +42,10 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
             }
             if (priorLength==pass.getCurrentLength()) {
                 switch (pass.getLastMethodUsed()) {
-                    case 1:
+                    case 0:
                         tryOtherSingleNounBased(input, pass);
                         break;
-                    case 0:
+                    case 1:
                         tryOtherSingleNounBased(input, pass);
                         break;
                     case 2:
@@ -73,8 +74,11 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
                 }
             }
         }
-        if (pass.getMinLength()-pass.getCurrentLength()>1) {
+        if (pass.getMinLength()-pass.getCurrentLength()>0) {
             methodPicker(input, pass, questionfield);
+        }
+        else if (pass.getMaxLength()-pass.getCurrentLength()<0) { //Remove later
+            System.out.println("Too long password");
         }
         else {
             passComboBox.addItem(MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1).getPasswordText());
@@ -316,8 +320,11 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
             if (methodToTry==pass.getLastMethodUsed()) {
                 continue;
             }
-            switch (i) {
+            switch (methodToTry) {
                 case 0: //Maybe make better memory methods text
+                    if (!input.qwerty) {
+                        continue;
+                    }
                     PhysicalLetterPatterns.useMethod(input, pass);
                     break;
                 case 1:
@@ -326,9 +333,22 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
                 case 2:
                     LetterSwap.incrementingStepsInAlphabet(input, pass, 1, 1); //Set steps to random? Or let user choose between specified and random? Set different random based on complexity chosen?
                     break;
+                case 3:
+                    AddLetterInPattern.addABC(pass, input, 2); //Make interval random?
+                    break;
+                case 4:
+                    AddLetterInPattern.banditLanguage(pass, input);
+                    break;
+                case 5:
+                    if (!input.qwerty) {
+                        continue;
+                    }
+                    //Add physical next to
+                    break;
                 default:
                     
             }
+            break;
         }
         
     }
@@ -360,6 +380,17 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
                         if (used) {
                             continue;
                         }
+                        else {
+                            for (int i = 0; i < pass.getSkippedSingleNounAmount(); i++) {
+                                if (pass.getSkippedSingleNoun(i)==questionNr) {
+                                    used = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (used) {
+                            continue;
+                        }
                         questionField.setText(QuestionCollection.singleNounBased[questionNr]);
                         pass.addSingleNounUsed(questionNr);
                         break;
@@ -382,12 +413,23 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
                         if (used) {
                             continue;
                         }
+                        else {
+                            for (int i = 0; i < pass.getSkippedSingleNounAmount(); i++) {
+                                if (pass.getSkippedSingleNoun(i)==questionNr) {
+                                    used = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (used) {
+                            continue;
+                        }
                         questionField.setText(QuestionCollection.singleNounBased[questionNr]);
                         pass.addSingleNounUsed(questionNr);
                         break;
                     }
-            }
-            else if (lengthToFillNext==3) { //Make correct questions later
+            } //Add support for longer length than 3? See also short questions in that case
+            else /*if (lengthToFillNext==3)*/ { //Make correct questions later
                 while (true) {
                         if (pass.getAmountOfSingleNounQuestionsUsed()>=QuestionCollection.singleNounBased.length) {
                             System.out.println("Slut på frågor?");
@@ -404,25 +446,36 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
                         if (used) {
                             continue;
                         }
+                        else {
+                            for (int i = 0; i < pass.getSkippedSingleNounAmount(); i++) {
+                                if (pass.getSkippedSingleNoun(i)==questionNr) {
+                                    used = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (used) {
+                            continue;
+                        }
                         questionField.setText(QuestionCollection.singleNounBased[questionNr]);
                         pass.addSingleNounUsed(questionNr);
                         break;
                     }
             }
-            else {
-
-            }
+            /*else {
+                System.out.println("Something fucky, see short question picker"); //Remove later
+            }*/
         }
         
     }
     void chooseShortQuestionMethod (Password pass, UserInput usIn, javax.swing.JLabel questionField, javax.swing.JComboBox<String> passComboBox, javax.swing.JPanel quesPan, javax.swing.JButton startBut, javax.swing.JButton printBut, javax.swing.JButton encryptAgainBut, javax.swing.JButton makeLongerBut) {//Look over parameters also NEED TO MAKE USER ANSWER CHECK FOR LENGTH TO GET LONG ENOUGH ANSWER
         if (pass.getMinLength()-pass.getCurrentLength()>0) {
             int length;
-            if (pass.getNextSHortLength()==0) {
-                length = random.nextInt(pass.getMaxLength()-pass.getCurrentLength()+1);
+            if (pass.getNextShortLength()==0) {
+                length = random.nextInt(pass.getMaxLength()-pass.getCurrentLength())+1;
             }
             else {
-                length = pass.getNextSHortLength();
+                length = pass.getNextShortLength();
             }
             usingShortQuestions = true;
             int availableShortQuestionMethods = 2;//Set to correct amount later
@@ -441,7 +494,10 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
                     break;
                 case 1:
                     ShortQuestionMethods.takeLastCharacterLast(pass, length, usIn);
+                    break;
             }
+        }
+        if (pass.getMinLength()-pass.getCurrentLength()>0) {
             shortQuestionPicker(pass, questionField);
         }
         else {

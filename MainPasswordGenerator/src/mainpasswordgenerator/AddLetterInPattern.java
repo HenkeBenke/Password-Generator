@@ -10,15 +10,17 @@ package mainpasswordgenerator;
  * @author aa97339
  */
 public class AddLetterInPattern {
-    static void addABC (Password pass, UserInput usIn, int interval) {
-        if (interval<2) {
+    static void addABC (Password pass, UserInput usIn, int interval) { //Currently only capital letters, maybe add non-capital as well?
+        if (interval<2) { //Need to fix, currently an interval of 2 doesn't make every second sign a letter from beginning of alphabet
             System.out.println("You fucked up letter pattern interval");
         }
         String partToAdd = "";
         int currentLetterPosition = 1;
+        int letterNrInAlphabet = 1;
         while (true) {
             if (currentLetterPosition%interval==0) {
-                partToAdd += String.valueOf((char)64+currentLetterPosition);
+                partToAdd += String.valueOf((char)(64+letterNrInAlphabet));
+                letterNrInAlphabet++;
             }
             partToAdd += usIn.firstText.charAt(currentLetterPosition-1);
             if (currentLetterPosition==usIn.getFirstText().length()) {

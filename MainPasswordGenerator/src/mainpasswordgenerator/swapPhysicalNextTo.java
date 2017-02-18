@@ -44,7 +44,7 @@ public class SwapPhysicalNextTo {
             switch (letterNumber) {
                 case 1:
                 case 33:
-                    textToReturn+=letterA(direction, letterNumber);
+                    textToReturn+=letterA(direction, letterNumber, rnd.nextInt(5));
                     break;
                 case 2:
                     //letterB(pass);
@@ -128,24 +128,41 @@ public class SwapPhysicalNextTo {
         pass.addToPassword(textToReturn);
         //Add memory method
     }
-    static String letterA (String direction, int letterNr) {
+    static String letterA (String direction, int letterNr, int steps) {
         String returnChar = "";
-        int steps = 1; //Change if variable step length is added
         if (steps==1) {
             switch (direction) {
                 case "up":
-                    returnChar = Integer.toString(letterNr+16);
+                    returnChar = Character.toString((char)(letterNr+16));
                     break;
                 case "right":
-                    returnChar = Integer.toString(letterNr+18);
+                    returnChar = Character.toString((char)(letterNr+18));
                     break;
 
                 case "down":
-                    returnChar = Integer.toString(letterNr+25);
+                    returnChar = Character.toString((char)(letterNr+25));
                     break;
 
                 case "left":
-                    returnChar = Integer.toString(letterNr+11);
+                    returnChar = Character.toString((char)(letterNr+11));
+                    break;
+            }
+        }
+        else if (steps==2) {
+            switch (direction) {
+                case "up":
+                    returnChar = "1";
+                    break;
+                case "right":
+                    returnChar = Character.toString((char)(letterNr+3));
+                    break;
+
+                case "down":
+                    returnChar = "1";
+                    break;
+
+                case "left":
+                    returnChar = Character.toString((char)(letterNr+10));
                     break;
             }
         }
