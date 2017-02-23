@@ -5,6 +5,7 @@
  */
 package mainpasswordgenerator;
 
+import java.awt.Font;
 import java.util.Random;
 
 
@@ -20,11 +21,16 @@ public class BasicGUI extends javax.swing.JFrame {
     public BasicGUI() {
         initComponents();
         questionPanel.setVisible(false);
+        addLengthPanel.setVisible(false);
+        Font outputFont = new Font("Monospaced", Font.PLAIN, 14);
+        textAreaShowPassword.setFont(outputFont);
+        textAreaShowPassword.setLineWrap(true);
+        textAreaShowPassword.setWrapStyleWord(true);
         /*for (int i = 0; i < questionPanel.getComponentCount(); i++) {
             questionPanel.getComponent(i).setVisible(false);
         }*/
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +50,7 @@ public class BasicGUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lengthPicker = new javax.swing.JSlider();
-        variedEncryptionCheckBox = new javax.swing.JCheckBox();
+        complexityCheck = new javax.swing.JCheckBox();
         qwertyCheck = new javax.swing.JCheckBox();
         submit = new javax.swing.JButton();
         flexibleLengthCheckBox = new javax.swing.JCheckBox();
@@ -58,6 +64,10 @@ public class BasicGUI extends javax.swing.JFrame {
         textAreaShowPassword = new javax.swing.JTextArea();
         encryptAgainBut = new javax.swing.JButton();
         makeLongerBut = new javax.swing.JButton();
+        addLengthPanel = new javax.swing.JPanel();
+        lengthToAddSlider = new javax.swing.JSlider();
+        addLengthLbl = new javax.swing.JLabel();
+        addLengthBut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,12 +140,8 @@ public class BasicGUI extends javax.swing.JFrame {
         lengthPicker.setToolTipText("");
         lengthPicker.setValue(10);
 
-        variedEncryptionCheckBox.setText("Vary encryption methods");
-        variedEncryptionCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                variedEncryptionCheckBoxActionPerformed(evt);
-            }
-        });
+        complexityCheck.setText("Higher complexity");
+        complexityCheck.setToolTipText("Gives better variation but might make it more difficult to remember");
 
         qwertyCheck.setSelected(true);
         qwertyCheck.setText("QWERTY layout keyboard");
@@ -214,7 +220,7 @@ public class BasicGUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel3))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(variedEncryptionCheckBox)
+                                .addComponent(complexityCheck)
                                 .addGap(18, 18, 18)
                                 .addComponent(qwertyCheck)
                                 .addGap(0, 186, Short.MAX_VALUE)))
@@ -241,7 +247,7 @@ public class BasicGUI extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(variedEncryptionCheckBox)
+                                    .addComponent(complexityCheck)
                                     .addComponent(qwertyCheck))))
                         .addComponent(flexibleLengthCheckBox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -263,7 +269,6 @@ public class BasicGUI extends javax.swing.JFrame {
         textAreaShowPassword.setColumns(20);
         textAreaShowPassword.setRows(5);
         textAreaShowPassword.setText("Passwords can be displayed here");
-        textAreaShowPassword.setToolTipText("");
         jScrollPane1.setViewportView(textAreaShowPassword);
 
         encryptAgainBut.setText("Encrypt password again");
@@ -282,6 +287,52 @@ public class BasicGUI extends javax.swing.JFrame {
             }
         });
 
+        lengthToAddSlider.setMajorTickSpacing(5);
+        lengthToAddSlider.setMaximum(20);
+        lengthToAddSlider.setMinimum(1);
+        lengthToAddSlider.setMinorTickSpacing(1);
+        lengthToAddSlider.setPaintLabels(true);
+        lengthToAddSlider.setPaintTicks(true);
+        lengthToAddSlider.setValue(5);
+
+        addLengthLbl.setText("Length to add");
+
+        addLengthBut.setText("Ok");
+        addLengthBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addLengthButActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout addLengthPanelLayout = new javax.swing.GroupLayout(addLengthPanel);
+        addLengthPanel.setLayout(addLengthPanelLayout);
+        addLengthPanelLayout.setHorizontalGroup(
+            addLengthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addLengthPanelLayout.createSequentialGroup()
+                .addGroup(addLengthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addLengthPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lengthToAddSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(addLengthPanelLayout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(addLengthLbl))
+                    .addGroup(addLengthPanelLayout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(addLengthBut)))
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        addLengthPanelLayout.setVerticalGroup(
+            addLengthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addLengthPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(addLengthLbl)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lengthToAddSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(addLengthBut)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -289,28 +340,30 @@ public class BasicGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(questionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(79, 79, 79)
                         .addComponent(showPassword)
-                        .addGap(40, 40, 40)
+                        .addGap(18, 18, 18)
                         .addComponent(choosePasswordCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(88, 88, 88)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(encryptAgainBut)
                             .addComponent(makeLongerBut))
-                        .addGap(22, 22, 22))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addLengthPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addComponent(jScrollPane1)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -321,13 +374,16 @@ public class BasicGUI extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(questionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                        .addGap(11, 11, 11))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(encryptAgainBut)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(makeLongerBut)
-                        .addGap(6, 6, 6)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(encryptAgainBut)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(makeLongerBut))
+                            .addComponent(addLengthPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -338,7 +394,7 @@ public class BasicGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -357,7 +413,7 @@ public class BasicGUI extends javax.swing.JFrame {
             Password pass = new Password(minLengthSlider.getValue(), maxLengthSlider.getValue());
             MainPasswordGenerator.listOfPasswords.add(MainPasswordGenerator.listOfPasswords.size(), pass);
         }
-        UserInput usIn = new UserInput(qwertyCheck.isSelected(), variedEncryptionCheckBox.isSelected());
+        UserInput usIn = new UserInput(qwertyCheck.isSelected(), complexityCheck.isSelected());
         MainPasswordGenerator.listOfInputs.add(MainPasswordGenerator.listOfInputs.size(), usIn);
         submit.setEnabled(false);
         showPassword.setEnabled(false);
@@ -381,10 +437,6 @@ public class BasicGUI extends javax.swing.JFrame {
             textAreaShowPassword.append(pass.getMemoryMethod(i)+"\n");
         }
     }//GEN-LAST:event_showPasswordActionPerformed
-
-    private void variedEncryptionCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_variedEncryptionCheckBoxActionPerformed
-        //Change to complexity instead?
-    }//GEN-LAST:event_variedEncryptionCheckBoxActionPerformed
                                                                                 //Make it so only one type of length picking is enabled at a time
     private void flexibleLengthCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flexibleLengthCheckBoxActionPerformed
         if (flexibleLengthCheckBox.isSelected()) {
@@ -411,9 +463,6 @@ public class BasicGUI extends javax.swing.JFrame {
         if (forenameField.getText().length()==0) {  //Make changes later
             System.out.println("No answer recieved");
             return;
-        }
-        else if (false) { //Add code for encrypt again compatability
-            
         }
         System.out.println("Answered"); //Remove later
         UserInput usIn = MainPasswordGenerator.listOfInputs.get(MainPasswordGenerator.listOfInputs.size()-1);
@@ -488,23 +537,30 @@ public class BasicGUI extends javax.swing.JFrame {
         int passNr = choosePasswordCombo.getSelectedIndex();
         MainPasswordGenerator.encrypt.encryptAgain(passNr, choosePasswordCombo);
     }//GEN-LAST:event_encryptAgainButActionPerformed
-    //Make it so you choose have many chars longer you want it
+    
     private void makeLongerButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeLongerButActionPerformed
         int passNr = choosePasswordCombo.getSelectedIndex();
-        int max = 30; //Make user choose-able
-        int interval = 5; //Make user choose-able or remove
         Password pass = new Password(MainPasswordGenerator.listOfPasswords.get(passNr));
         MainPasswordGenerator.listOfPasswords.add(MainPasswordGenerator.listOfPasswords.size(), pass);
-        pass.makeLonger(max, interval);
         UserInput usIn = new UserInput(MainPasswordGenerator.listOfInputs.get(passNr));
         MainPasswordGenerator.listOfInputs.add(MainPasswordGenerator.listOfInputs.size(), usIn);
+        addLengthPanel.setVisible(true);
+    }//GEN-LAST:event_makeLongerButActionPerformed
+
+    private void addLengthButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLengthButActionPerformed
+        Password pass = MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1);
+        UserInput usIn = MainPasswordGenerator.listOfInputs.get(MainPasswordGenerator.listOfInputs.size()-1);
+        int max = lengthToAddSlider.getValue();
+        int interval = 0;    //Have interval?
+        pass.makeLonger(max, interval);
         submit.setEnabled(false);
         showPassword.setEnabled(false);
         encryptAgainBut.setEnabled(false);
         makeLongerBut.setEnabled(false);
         MainPasswordGenerator.encrypt.methodPicker(usIn, pass, questionLbl);
+        addLengthPanel.setVisible(false);
         questionPanel.setVisible(true);
-    }//GEN-LAST:event_makeLongerButActionPerformed
+    }//GEN-LAST:event_addLengthButActionPerformed
 
     
     /**
@@ -543,8 +599,12 @@ public class BasicGUI extends javax.swing.JFrame {
   //  }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addLengthBut;
+    private javax.swing.JLabel addLengthLbl;
+    private javax.swing.JPanel addLengthPanel;
     private javax.swing.JButton cancelBut;
     private javax.swing.JComboBox choosePasswordCombo;
+    private javax.swing.JCheckBox complexityCheck;
     private javax.swing.JButton encryptAgainBut;
     private javax.swing.JCheckBox flexibleLengthCheckBox;
     private javax.swing.JTextField forenameField;
@@ -555,6 +615,7 @@ public class BasicGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSlider lengthPicker;
+    private javax.swing.JSlider lengthToAddSlider;
     private javax.swing.JButton makeLongerBut;
     private javax.swing.JSlider maxLengthSlider;
     private javax.swing.JSlider minLengthSlider;
@@ -566,6 +627,5 @@ public class BasicGUI extends javax.swing.JFrame {
     private javax.swing.JButton submit;
     private javax.swing.JButton submitAnswerButt;
     private javax.swing.JTextArea textAreaShowPassword;
-    private javax.swing.JCheckBox variedEncryptionCheckBox;
     // End of variables declaration//GEN-END:variables
    }

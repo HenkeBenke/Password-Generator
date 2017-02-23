@@ -11,12 +11,12 @@ package mainpasswordgenerator;
  */
 public class UserInput {
     boolean qwerty;
-    boolean variedMethods;
+    boolean higherComplexity;
     String firstText = "";
     String passToEncryptAgain;
-    public UserInput (boolean qwe, boolean varMet) {
+    public UserInput (boolean qwe, boolean complexity) {
         qwerty = qwe;
-        variedMethods = varMet;
+        higherComplexity = complexity;
     }
     public UserInput (UserInput usIn) {
         qwerty = usIn.getQwerty();
