@@ -31,7 +31,7 @@ public class SwapPhysicalNextTo {
                 direction = "left";
                 break;
         }
-        char letter = ' ';
+        char letter;
         for (int i = 0; i < input.getFirstText().length(); i++) {               //Get the first letter of the word and get the corresponding number, where "a" is 1 etc
             int uniNr = (int)input.getFirstText().charAt(i);
             if (uniNr<65 || uniNr>122 || (uniNr>90&&uniNr<97)) { //Add support for numbers?
@@ -40,11 +40,10 @@ public class SwapPhysicalNextTo {
             }
             letter = input.getFirstText().charAt(i);
             letterNumber = (int)letter;
-            letterNumber -= 64;
             switch (letterNumber) {
-                case 1:
-                case 33:
-                    textToReturn+=letterA(direction, letterNumber, rnd.nextInt(5));
+                case 65:
+                case 97:
+                    textToReturn+=letterA(direction, letterNumber, rnd.nextInt(5)+1);
                     break;
                 case 2:
                     //letterB(pass);
@@ -166,6 +165,154 @@ public class SwapPhysicalNextTo {
                     break;
             }
         }
-        return "s";
+        else if (steps==3) {
+            switch (direction) {
+                case "up":
+                    returnChar = Character.toString((char)(letterNr+25));
+                    break;
+                case "right":
+                    returnChar = Character.toString((char)(letterNr+5));
+                    break;
+
+                case "down":
+                    returnChar = Character.toString((char)(letterNr+16));
+                    break;
+
+                case "left":
+                    returnChar = Character.toString((char)(letterNr+9));
+                    break;
+            }
+        }
+        else if (steps==4) {
+            switch (direction) {
+                case "up":
+                    returnChar = Character.toString((char)(letterNr));
+                    break;
+                case "right":
+                    returnChar = Character.toString((char)(letterNr+6));
+                    break;
+
+                case "down":
+                    returnChar = Character.toString((char)(letterNr));
+                    break;
+
+                case "left":
+                    returnChar = Character.toString((char)(letterNr+7));
+                    break;
+            }
+        }
+        else if (steps==5) {
+            switch (direction) {
+                case "up":
+                    returnChar = Character.toString((char)(letterNr+16));
+                    break;
+                case "right":
+                    returnChar = Character.toString((char)(letterNr+7));
+                    break;
+
+                case "down":
+                    returnChar = Character.toString((char)(letterNr+25));
+                    break;
+
+                case "left":
+                    returnChar = Character.toString((char)(letterNr+6));
+                    break;
+            }
+        }
+        return returnChar;
+    }
+    static String letterB (String direction, int letterNr, int steps) {
+        String returnChar = "";
+        if (steps==1) {
+            switch (direction) {
+                case "up":
+                    returnChar = Character.toString((char)(letterNr+5));
+                    break;
+                case "right":
+                    returnChar = Character.toString((char)(letterNr+12));
+                    break;
+
+                case "down":
+                    returnChar = "5";
+                    break;
+
+                case "left":
+                    returnChar = Character.toString((char)(letterNr+20));
+                    break;
+            }
+        }
+        else if (steps==2) {
+            switch (direction) {
+                case "up":
+                    returnChar = Character.toString((char)(letterNr+18));
+                    break;
+                case "right":
+                    returnChar = Character.toString((char)(letterNr+11));
+                    break;
+
+                case "down":
+                    returnChar = Character.toString((char)(letterNr+18));
+                    break;
+
+                case "left":
+                    returnChar = Character.toString((char)(letterNr+1));
+                    break;
+            }
+        }
+        else if (steps==3) {
+            switch (direction) {
+                case "up":
+                    returnChar = "5";
+                    break;
+                case "right":
+                    returnChar = Character.toString((char)(letterNr+5));
+                    break;
+
+                case "down":
+                    returnChar = Character.toString((char)(letterNr+16));
+                    break;
+
+                case "left":
+                    returnChar = Character.toString((char)(letterNr+9));
+                    break;
+            }
+        }
+        else if (steps==4) {
+            switch (direction) {
+                case "up":
+                    returnChar = Character.toString((char)(letterNr));
+                    break;
+                case "right":
+                    returnChar = Character.toString((char)(letterNr+6));
+                    break;
+
+                case "down":
+                    returnChar = Character.toString((char)(letterNr));;
+                    break;
+
+                case "left":
+                    returnChar = Character.toString((char)(letterNr+7));
+                    break;
+            }
+        }
+        else if (steps==5) {
+            switch (direction) {
+                case "up":
+                    returnChar = Character.toString((char)(letterNr+16));;
+                    break;
+                case "right":
+                    returnChar = Character.toString((char)(letterNr+7));
+                    break;
+
+                case "down":
+                    returnChar = Character.toString((char)(letterNr+25));;
+                    break;
+
+                case "left":
+                    returnChar = Character.toString((char)(letterNr+6));
+                    break;
+            }
+        }
+        return returnChar;
     }
 }

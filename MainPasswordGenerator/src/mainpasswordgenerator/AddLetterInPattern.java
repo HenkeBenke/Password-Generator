@@ -11,19 +11,22 @@ package mainpasswordgenerator;
  */
 public class AddLetterInPattern {
     static void addABC (Password pass, UserInput usIn, int interval) { //Currently only capital letters, maybe add non-capital as well?
-        if (interval<2) { //Need to fix, currently an interval of 2 doesn't make every second sign a letter from beginning of alphabet
+        if (interval<2) { //Need to fix, currently an interval of 2 doesn't make every second sign a letter from beginning of alphabet SHOULD BE FIXED I THINK
             System.out.println("You fucked up letter pattern interval");
         }
         String partToAdd = "";
         int currentLetterPosition = 1;
         int letterNrInAlphabet = 1;
+        int endLength = usIn.getFirstText().length();
         while (true) {
             if (currentLetterPosition%interval==0) {
                 partToAdd += String.valueOf((char)(64+letterNrInAlphabet));
+                currentLetterPosition++;
+                endLength++;
                 letterNrInAlphabet++;
             }
-            partToAdd += usIn.firstText.charAt(currentLetterPosition-1);
-            if (currentLetterPosition==usIn.getFirstText().length()) {
+            partToAdd += usIn.firstText.charAt(currentLetterPosition-letterNrInAlphabet);//Should work I think?
+            if (currentLetterPosition == endLength) {
                 break;
             }
             currentLetterPosition++;
