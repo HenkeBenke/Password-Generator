@@ -20,19 +20,34 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
             return;
         }
         else {
+            int step;
             int priorLength = pass.getCurrentLength();
             switch (pass.getLastMethodUsed()) {
                 case 0: //Maybe make better memory methods text
                     PhysicalLetterPatterns.useMethod(input, pass);
                     break;
                 case 1:
-                    LetterSwap.stepsInAlphabet(input, pass, 1);  //Set steps to random? Or let user choose between specified and random? Set different random based on complexity chosen?
+                    if (input.getComplexity()) { step = random.nextInt(10)+1;} else { step = random.nextInt(3)+1;} //Good values?
+                    LetterSwap.stepsInAlphabet(input, pass, step); 
                     break;
                 case 2:
-                    LetterSwap.incrementingStepsInAlphabet(input, pass, 1, 1); //Set steps to random? Or let user choose between specified and random? Set different random based on complexity chosen?
+                    if (input.getComplexity()) { step = random.nextInt(3)+1;} else { step = 1;} //Good values?
+                    LetterSwap.incrementingStepsInAlphabet(input, pass, step, 1); //Set start to random?
                     break;
                 case 3:
-                    AddLetterInPattern.addABC(pass, input, 2); //Set interval to random?
+                    if (input.getComplexity()) {
+                        step = random.nextInt(5)+2; //Good value?
+                        if (input.getFirstText().length()<6) {
+                            step = input.getFirstText().length();
+                        }
+                    }
+                    else {
+                        step = random.nextInt(2)+2; //Good value?
+                        if (input.getFirstText().length()<3) {
+                            step = input.getFirstText().length();
+                        }
+                    } 
+                    AddLetterInPattern.addABC(pass, input, step);
                     break;
                 case 4:
                     AddLetterInPattern.banditLanguage(pass, input);
@@ -320,6 +335,7 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
             if (methodToTry==pass.getLastMethodUsed()) {
                 continue;
             }
+            int step;
             switch (methodToTry) {
                 case 0: //Maybe make better memory methods text
                     if (!input.qwerty) {
@@ -328,13 +344,27 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
                     PhysicalLetterPatterns.useMethod(input, pass);
                     break;
                 case 1:
-                    LetterSwap.stepsInAlphabet(input, pass, 1);  //Set steps to random? Or let user choose between specified and random? Set different random based on complexity chosen?
+                    if (input.getComplexity()) { step = random.nextInt(10)+1;} else { step = random.nextInt(3)+1;} //Good values?
+                    LetterSwap.stepsInAlphabet(input, pass, step);  
                     break;
                 case 2:
-                    LetterSwap.incrementingStepsInAlphabet(input, pass, 1, 1); //Set steps to random? Or let user choose between specified and random? Set different random based on complexity chosen?
+                    if (input.getComplexity()) { step = random.nextInt(3)+1;} else { step = 1;} //Good values?
+                    LetterSwap.incrementingStepsInAlphabet(input, pass, step, 1); //Set start to random? 
                     break;
                 case 3:
-                    AddLetterInPattern.addABC(pass, input, 2); //Make interval random?
+                    if (input.getComplexity()) {
+                        step = random.nextInt(5)+2; //Good value?
+                        if (input.getFirstText().length()<6) {
+                            step = input.getFirstText().length();
+                        }
+                    }
+                    else {
+                        step = random.nextInt(2)+2; //Good value?
+                        if (input.getFirstText().length()<3) {
+                            step = input.getFirstText().length();
+                        }
+                    } 
+                    AddLetterInPattern.addABC(pass, input, step);
                     break;
                 case 4:
                     AddLetterInPattern.banditLanguage(pass, input);
@@ -356,6 +386,9 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
         int remainingLengthToMax = pass.getMaxLength()-pass.getCurrentLength();
         if (pass.getMinLength()-pass.getCurrentLength()>0) { //Shouldn't be necessary right?
             int lengthToFillNext = random.nextInt(remainingLengthToMax)+1;
+            if (lengthToFillNext>3) { //Only support for up to 3 in shortQuestions
+                lengthToFillNext = 3;
+            }
             pass.setNextShortLength(lengthToFillNext);
             if (remainingLengthToMax<0) {
                 System.out.println("Max length exceded somehow...");
@@ -428,7 +461,7 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
                         pass.addSingleNounUsed(questionNr);
                         break;
                     }
-            } //Add support for longer length than 3? See also short questions in that case
+            } //Add support for longer length than 3? See also short questions, shortQuestionPicker and choose shortMethod in that case
             else /*if (lengthToFillNext==3)*/ { //Make correct questions later
                 while (true) {
                         if (pass.getAmountOfSingleNounQuestionsUsed()>=QuestionCollection.singleNounBased.length) {
@@ -473,6 +506,9 @@ public class Encryptor { //Seems to stop too early sometimes; length is static 1
             int length;
             if (pass.getNextShortLength()==0) {
                 length = random.nextInt(pass.getMaxLength()-pass.getCurrentLength())+1;
+                if (length>3) {
+                    length = 3;
+                }
             }
             else {
                 length = pass.getNextShortLength();

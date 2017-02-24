@@ -80,6 +80,12 @@ public class BasicGUI extends javax.swing.JFrame {
             }
         });
 
+        forenameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                forenameFieldActionPerformed(evt);
+            }
+        });
+
         questionLbl.setText("Place holder");
 
         cancelBut.setText("Cancel");
@@ -561,6 +567,24 @@ public class BasicGUI extends javax.swing.JFrame {
         addLengthPanel.setVisible(false);
         questionPanel.setVisible(true);
     }//GEN-LAST:event_addLengthButActionPerformed
+
+    private void forenameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forenameFieldActionPerformed
+        if (forenameField.getText().length()==0) {  //Make changes later
+            System.out.println("No answer recieved");
+            return;
+        }
+        System.out.println("Answered"); //Remove later
+        UserInput usIn = MainPasswordGenerator.listOfInputs.get(MainPasswordGenerator.listOfInputs.size()-1);
+        usIn.setFirstText(forenameField.getText());
+        forenameField.setText(""); //Should work to have it here
+        Password pass = MainPasswordGenerator.listOfPasswords.get(MainPasswordGenerator.listOfPasswords.size()-1);
+        if (MainPasswordGenerator.encrypt.usingShortQuestions) {
+            MainPasswordGenerator.encrypt.chooseShortQuestionMethod(pass, usIn, questionLbl, choosePasswordCombo, questionPanel, submit, showPassword, encryptAgainBut, makeLongerBut);
+        }
+        else {
+            MainPasswordGenerator.encrypt.makePassword(usIn, pass, questionLbl, choosePasswordCombo, questionPanel, submit, showPassword, encryptAgainBut, makeLongerBut);
+        }
+    }//GEN-LAST:event_forenameFieldActionPerformed
 
     
     /**

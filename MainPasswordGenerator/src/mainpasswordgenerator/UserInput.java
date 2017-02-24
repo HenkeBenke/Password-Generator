@@ -36,4 +36,7 @@ public class UserInput {
     boolean getQwerty () {
         return qwerty;
     }
+    boolean getComplexity () {
+        return higherComplexity;
+    }
 }

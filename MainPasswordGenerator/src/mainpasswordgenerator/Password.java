@@ -78,14 +78,11 @@ public class Password {
     void addToMemoryList (String textToAdd) {
         memoryMethods.add(memoryMethods.size(), textToAdd);
     }
-    void makeLonger (int max, int interval) {
-        if (max<maxLength) {}
-        else {
-            maxLength = max;
-            minLength = maxLength-interval;
-            if (minLength<0) {
-                minLength = 1;         //Maybe make higher
-            }
+    void makeLonger (int increase, int interval) {
+        maxLength += increase;
+        minLength = maxLength-interval;
+        if (minLength<0) {
+            minLength = 1;         //Maybe make higher
         }
     }
     void setLastMethodUsed (int index) {
